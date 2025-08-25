@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cineview 🎬</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
+  </head>
+  <body class="bg-gradient-to-br from-purple-800 via-indigo-700 to-purple-900 min-h-screen text-white">
+    <!-- Header -->
+    <header class="py-6 text-center">
+      <h1 class="text-5xl font-extrabold drop-shadow-lg">
+        Cine<span class="text-yellow-300">view</span> 🎬
+      </h1>
+      <p class="mt-2 text-lg opacity-90">Find your favorite movies instantly</p>
+    </header>
+
+    <!-- Search -->
+    <section class="flex justify-center mt-6">
+      <div class="flex w-3/4 md:w-1/2">
+        <input
+          type="text"
+          placeholder="Search movie..."
+          class="input-keyword flex-1 px-4 py-3 rounded-l-2xl text-gray-800 focus:outline-none"
+        />
+        <button
+          class="search-button bg-yellow-400 hover:bg-yellow-500 px-5 py-3 rounded-r-2xl font-bold text-gray-900"
+        >
+          Search
+        </button>
+      </div>
+    </section>
+
+    <!-- Movie Cards -->
+    <section class="px-6 mt-10">
+      <div class="movie-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+    </section>
+
+    <!-- Modal -->
+    <div
+      id="movieDetailModal"
+      class="modal fixed inset-0 bg-black/70 items-center justify-center z-50 p-4"
+    >
+      <div
+        class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-3xl max-w-5xl w-full text-gray-200 shadow-2xl overflow-hidden"
+      >
+        <!-- Header Modal -->
+        <div class="flex justify-between items-center bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-4">
+          <h2 class="font-bold text-2xl text-white">🎥 Movie Details</h2>
+          <button
+            class="close-modal text-white font-bold hover:text-yellow-300 text-2xl"
+          >
+            ✖
+          </button>
+        </div>
+        <!-- Body Modal -->
+        <div class="modal-body p-6 max-h-[75vh] overflow-y-auto"></div>
+      </div>
+    </div>
+    <script src="assets/js/script.js"></script>
+  </body>
+</html>
