@@ -2,6 +2,9 @@ $(document).ready(function () {
   const apiKey = "b90a5a49";
   let typingTimer;
 
+  // Firestore reference
+  const db = firebase.firestore();
+
   // Router
   function router() {
     const hash = window.location.hash || "#login";
@@ -12,6 +15,7 @@ $(document).ready(function () {
         window.location.hash = "#home";
         return;
       }
+
       $("#app").html(`
         <div class="flex items-center justify-center min-h-screen">
           <div class="bg-white p-8 rounded-xl shadow-lg text-gray-800 w-full max-w-md text-center">
@@ -142,6 +146,9 @@ $(document).ready(function () {
                 const movieDetail = showMovieDetail(m);
                 $(".modal-body").html(movieDetail);
                 $("#movieDetailModal").removeClass("hidden").addClass("flex");
+
+                // 🔥 load komentar per imdbID
+                loadComments(m.imdbID);
               },
             });
           });
@@ -170,13 +177,12 @@ $(document).ready(function () {
     `;
   }
 
-  // Movie detail modal
+  // Movie detail modal + komentar
   function showMovieDetail(m) {
     let ratings = "";
     if (m.Ratings && m.Ratings.length > 0) {
       ratings = m.Ratings.map(
-        (r) =>
-          `<li class="mb-1"><span class="font-semibold">${r.Source}:</span> ${r.Value}</li>`
+        (r) => `<li class="mb-1"><span class="font-semibold">${r.Source}:</span> ${r.Value}</li>`
       ).join("");
     } else {
       ratings = "<li>No ratings available</li>";
@@ -185,7 +191,9 @@ $(document).ready(function () {
     return `
       <div class="flex flex-col md:flex-row gap-8">
         <div class="flex-shrink-0">
-          <img src="${m.Poster != "N/A" ? m.Poster : "https://via.placeholder.com/300x400"}" alt="${m.Title}" class="w-64 rounded-2xl shadow-lg object-cover border-4 border-purple-600">
+          <img src="${m.Poster != "N/A" ? m.Poster : "https://via.placeholder.com/300x400"}" 
+               alt="${m.Title}" 
+               class="w-64 rounded-2xl shadow-lg object-cover border-4 border-purple-600">
         </div>
         <div class="flex-1 space-y-3">
           <h3 class="text-3xl font-extrabold text-yellow-300">${m.Title} <span class="text-white">(${m.Year})</span></h3>
@@ -205,7 +213,58 @@ $(document).ready(function () {
           <p class="mt-4 text-gray-300"><span class="font-semibold text-purple-400">Plot:</span> ${m.Plot}</p>
         </div>
       </div>
+
+      <!-- Komentar -->
+      <div class="mt-8 border-t border-gray-700 pt-4">
+        <h4 class="text-xl font-bold text-yellow-300 mb-3">💬 Comments</h4>
+        <div id="commentsList" class="space-y-3 mb-4"></div>
+        <form id="commentForm" class="flex gap-2">
+          <input type="text" id="commentInput" placeholder="Write a comment..." 
+            class="flex-1 px-4 py-2 rounded-xl text-gray-800 focus:outline-none" required>
+          <button type="submit" 
+            class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-xl">Send</button>
+        </form>
+      </div>
     `;
+  }
+
+  // 🔥 Load & submit komentar
+  function loadComments(imdbID) {
+    const commentsRef = db.collection("comments").doc(imdbID).collection("messages").orderBy("timestamp", "asc");
+
+    commentsRef.onSnapshot((snapshot) => {
+      let html = "";
+      snapshot.forEach((doc) => {
+        const c = doc.data();
+        html += `
+          <div class="bg-gray-800 p-3 rounded-xl">
+            <div class="flex items-center gap-2">
+              <img src="${c.userPhoto}" class="w-8 h-8 rounded-full" />
+              <span class="font-bold text-purple-300">${c.userName}</span>
+            </div>
+            <p class="ml-10 text-gray-200">${c.text}</p>
+          </div>
+        `;
+      });
+      $("#commentsList").html(html || "<p class='text-gray-400'>No comments yet.</p>");
+    });
+
+    // Submit komentar
+    $(document).off("submit", "#commentForm").on("submit", "#commentForm", function (e) {
+      e.preventDefault();
+      const user = JSON.parse(localStorage.getItem("cineviewUser"));
+      const text = $("#commentInput").val().trim();
+      if (!text) return;
+
+      db.collection("comments").doc(imdbID).collection("messages").add({
+        userName: user.name,
+        userPhoto: user.photo,
+        text: text,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      });
+
+      $("#commentInput").val("");
+    });
   }
 
   // Init router
