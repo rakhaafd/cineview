@@ -4,38 +4,93 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cineview 🎬</title>
+    <!-- Jquery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="assets/css/style.css">
-  </head>
-  <body class="bg-gradient-to-br from-purple-800 via-indigo-700 to-purple-900 min-h-screen text-white">
-    <!-- Header -->
-    <header class="py-6 text-center">
-      <h1 class="text-5xl font-extrabold drop-shadow-lg">
-        Cine<span class="text-yellow-300">view</span> 🎬
-      </h1>
-      <p class="mt-2 text-lg opacity-90">Find your favorite movies instantly</p>
-    </header>
 
-    <!-- Search -->
-    <section class="flex justify-center mt-6">
-      <div class="flex w-3/4 md:w-1/2">
+    <!-- TailWind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+  </head>
+  <body
+    class="bg-gradient-to-br from-purple-800 via-indigo-700 to-purple-900 h-screen text-white"
+  >
+    <!-- Header -->
+    <header
+      class="w-full px-4 py-2 flex flex-row items-center justify-between gap-x-4 sticky top-0 left-0"
+    >
+      <!-- Nav -->
+      <nav class="flex items-center gap-x-3 w-full md:w-auto md:justify-start">
+        <button type="button" name="hamburger" class="text-2xl">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <h1 class="text-xl md:text-2xl font-extrabold drop-shadow-lg">
+          Cineview
+        </h1>
+      </nav>
+
+      <!-- Search (Desktop / Tablet) -->
+      <div class="hidden md:flex w-full md:w-1/2">
         <input
           type="text"
           placeholder="Search movie..."
-          class="input-keyword flex-1 px-4 py-3 rounded-l-2xl text-gray-800 focus:outline-none"
+          class="input-keyword flex-1 px-4 py-2 rounded-2xl text-gray-800 focus:outline-none"
         />
+      </div>
+
+      <!-- Account + Search Icon (Mobile) -->
+      <div class="flex justify-end w-full md:w-auto gap-x-3">
         <button
-          class="search-button bg-yellow-400 hover:bg-yellow-500 px-5 py-3 rounded-r-2xl font-bold text-gray-900"
+          id="mobile-search-btn"
+          type="button"
+          class="flex md:hidden text-xl p-3 rounded-full text-white hover:bg-gray-200 hover:text-gray-700"
         >
-          Search
+          <i class="fa-solid fa-magnifying-glass"></i>
         </button>
+
+        <button type="button" name="user" class="text-xl md:text-2xl">
+          <i class="fa-solid fa-user"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Mobile Searchbar (Hidden by default) -->
+    <div id="mobile-search" class="hidden md:hidden px-4 pb-4 absolute">
+      <input
+        type="text"
+        placeholder="Search movie..."
+        class="input-keyword w-full px-4 py-2 rounded-2xl text-gray-800 focus:outline-none border border-gray-300"
+      />
+    </div>
+
+    <section
+      class="h-[80vh] w-full bg-cover bg-center flex items-center justify-center text-white"
+      style="
+        background-image: url('https://live.staticflickr.com/4019/4686112721_b0fe19fae0_h.jpg');
+      "
+    >
+      <div class="bg-black/60 p-6 rounded-2xl text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold drop-shadow-lg">
+          Welcome to Cineview 🎬
+        </h1>
+        <p class="mt-4 text-lg md:text-xl">
+          Discover your favorite movies here
+        </p>
       </div>
     </section>
 
     <!-- Movie Cards -->
-    <section class="px-6 mt-10">
-      <div class="movie-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+    <section class="px-6">
+      <div
+        class="movie-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+      ></div>
     </section>
 
     <!-- Modal -->
@@ -47,7 +102,9 @@
         class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-3xl max-w-5xl w-full text-gray-200 shadow-2xl overflow-hidden"
       >
         <!-- Header Modal -->
-        <div class="flex justify-between items-center bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-4">
+        <div
+          class="flex justify-between items-center bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-4"
+        >
           <h2 class="font-bold text-2xl text-white">🎥 Movie Details</h2>
           <button
             class="close-modal text-white font-bold hover:text-yellow-300 text-2xl"

@@ -1,17 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap");
 
 * {
-    font-family: "Lexend Deca";
+  font-family: "Lexend Deca";
+  padding: 0;
+  margin: 0;
 }
 
 .modal {
-        display: none;
-      }
-      .modal.active {
-        display: flex;
-        animation: fadeIn 0.3s ease-out;
-      }
-      @keyframes fadeIn {
-        from { opacity: 0; transform: scale(0.9); }
-        to { opacity: 1; transform: scale(1); }
-      }
+  display: none;
+}
+.modal.active {
+  display: flex;
+  animation: fadeIn 0.3s ease-out;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
