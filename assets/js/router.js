@@ -10,7 +10,7 @@ function router() {
     }
 
     $("#app").html(`
-      <div class="flex items-center justify-center min-h-screen">
+      <div class="bg-[url(/assets/img/bg-lgn.jpg)] flex items-center justify-center min-h-screen">
         <div class="bg-[radial-gradient(circle_at_center,_#0B0214_0%,_#3D0A6D_200%)] p-8 rounded-xl shadow-lg text-gray-800 w-full max-w-md">
           <h1 class="text-3xl font-bold mb-6 text-center text-white">Welcome To <span class="text-purple-600">Cineview🎬</span></h1>
 
