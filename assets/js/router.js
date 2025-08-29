@@ -107,7 +107,7 @@ function renderRegisterForm() {
               class="w-full px-4 py-2 rounded-xl bg-[#3D0A6D] text-white outline-none" required>
           </div>
           <button type="submit" 
-            class="w-full px-6 py-3 rounded-xl bg-green-600 hover:bg-green-700 text-white font-bold mt-4  ">
+            class="w-full px-6 py-3 rounded-xl bg-purple-700 hover:bg-purple-800 text-white font-bold mt-4  ">
             Create account
           </button>
         </form>
