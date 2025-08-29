@@ -1,42 +1,68 @@
 function renderHomePage(user) {
   $("#app").html(`
-    <header class="px-4 py-2 text-center flex items-center justify-between sticky">
-      <!-- Navbar -->
-      <nav class="flex gap-2 amd:gap-4 items-center">
-        <button class="text-2xl">
+    <header class="px-4 py-2 flex items-center justify-between sticky top-0 z-40">
+      <!-- Navbar kiri -->
+      <nav class="flex gap-2 md:gap-6 items-center">
+        <button class="text-2xl text-white">
           <i class="fa-solid fa-bars"></i>
         </button>
-        <h1 class="text-2xl font-extrabold drop-shadow-lg">
-          Cine<span class="text-yellow-300">view</span>🎬
-        </h1>
+        <div>
+          <img src="assets/img/Logo.png" alt="cineview" class="w-24 h-auto">
+        </div>
       </nav>
 
-      <!-- Search -->
-        <div class="flex w-1/4 ">
+      <div class="flex items-center gap-3 relative">
+        <!-- Tombol Search (Mobile) -->
+        <button id="mobileSearchBtn" class="block md:hidden text-gray-300 text-xl">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+
+        <!-- Search Box -->
+        <div id="searchBox"
+            class="hidden md:flex absolute md:static right-12 md:right-0 top-1 
+                    top-0 w-40 sm:w-52 md:w-64 lg:w-72 
+                    transition-transform duration-300 transform scale-x-0 origin-right md:scale-x-100 z-50">
           <input type="text" placeholder="Search"
-            class="input-keyword px-4 py-1 rounded-l-2xl text-gray-800 focus:outline-none" />
-          <button class="search-button bg-yellow-400 hover:bg-yellow-500 px-4 py-1 rounded-r-2xl font-bold text-gray-900">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </button>
+            class="input-keyword bg-gray-800 px-4 py-1 rounded-2xl text-gray-300 focus:outline-none w-full" />
         </div>
 
-      <!-- User -->
-      <button id="openBtn" class="flex items-center justify-center gap-3">
-        <img src="${user.photo}" class="w-10 h-10 rounded-full border-2 border-yellow-400" />
-      </button>
+        <!-- User -->
+        <button id="openBtn" class="flex items-center justify-center gap-3">
+          <img src="${user.photo}" class="w-10 h-10 rounded-full border-2 border-yellow-400" />
+        </button>
+      </div>
     </header>
 
     <!-- Pop up User -->
-    <div id="popupOverlay" class="fixed bg-black bg-opacity-60 top-0 left-0 w-screen h-screen hidden justify-center items-center">
-      <div class="flex flex-col gap-2 justify-center items-center bg-[radial-gradient(circle_at_center,_#0B0214_0%,_#3D0A6D_200%)] p-10 w-1/3 h-1/3 rounded-2xl ">
-        <div class="flex justify-center items-center h-full">
-          <img src="${user.photo}" class="w-13 h-13 rounded-full border-2 border-yellow-400" />
+    <div id="popupOverlay" class="fixed bg-black bg-opacity-60 top-0 left-0 w-screen h-screen hidden justify-center items-center z-50">
+      <div class="flex flex-col gap-4 justify-center items-center 
+                  bg-[radial-gradient(circle_at_center,_#0B0214_0%,_#3D0A6D_200%)] 
+                  p-6 sm:p-10 md:p-16 lg:p-20 
+                  w-11/12 sm:w-3/4 md:w-2/3 lg:w-1/3 
+                  h-auto rounded-2xl text-center">
+        
+        <!-- Foto user -->
+        <div class="flex justify-center items-center">
+          <img src="${user.photo}" class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full border-2 border-yellow-400 object-cover" />
         </div>
-        <span class="text-2x1 font-semibold">Hi, ${user.name}!</span>
-        <button id="logoutBtn" class=" px-4 py-2 bg-red-500 hover:bg-red-600 rounded-xl">Logout</button>
-        <button id="closeBtn" class="">Close</button>
+
+        <!-- Nama user -->
+        <span class="text-xl text-2xl font-semibold text-white">
+          Hi, ${user.name}!
+        </span>
+
+        <!-- Tombol -->
+        <div class="flex gap-3 mt-4 flex-wrap justify-center">
+          <button id="logoutBtn" class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-xl text-sm sm:text-base">
+            Logout
+          </button>
+          <button id="closeBtn" class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-xl text-sm sm:text-base">
+            Close
+          </button>
+        </div>
       </div>
     </div>
+
 
     <!-- Hero -->
     <section class="">
@@ -58,6 +84,27 @@ function renderHomePage(user) {
       </div>
     </div>
   `);
+
+  // Navbar
+  const mobileSearchBtn = document.getElementById("mobileSearchBtn");
+  const searchBox = document.getElementById("searchBox");
+
+  // Klik tombol search → icon hilang, searchbar muncul
+  mobileSearchBtn.addEventListener("click", (e) => {
+    e.stopPropagation(); // biar ga langsung ketutup
+    mobileSearchBtn.classList.add("hidden");
+    searchBox.classList.remove("hidden", "scale-x-0");
+    searchBox.classList.add("flex", "scale-x-100");
+  });
+
+  // Klik di luar searchbar → tutup searchbar, icon balik
+  document.addEventListener("click", (e) => {
+    if (!searchBox.contains(e.target) && !mobileSearchBtn.contains(e.target)) {
+      searchBox.classList.remove("flex", "scale-x-100");
+      searchBox.classList.add("hidden", "scale-x-0");
+      mobileSearchBtn.classList.remove("hidden");
+    }
+  });
 
   const $popupOverlay = $("#popupOverlay");
 
