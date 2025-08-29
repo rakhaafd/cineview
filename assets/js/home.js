@@ -2,7 +2,7 @@ function renderHomePage(user) {
   $("#app").html(`
     <header class="px-4 py-2 text-center flex items-center justify-between sticky">
       <!-- Navbar -->
-      <nav class="flex gap-2 items-center">
+      <nav class="flex gap-2 amd:gap-4 items-center">
         <button class="text-2xl">
           <i class="fa-solid fa-bars"></i>
         </button>
@@ -21,11 +21,22 @@ function renderHomePage(user) {
         </div>
 
       <!-- User -->
-      <div class="flex items-center justify-center gap-3">
+      <button id="openBtn" class="flex items-center justify-center gap-3">
         <img src="${user.photo}" class="w-10 h-10 rounded-full border-2 border-yellow-400" />
-        <button id="logoutBtn" class="ml-4 px-4 py-2 bg-red-500 hover:bg-red-600 rounded-xl">Logout</button>
-      </div>
+      </button>
     </header>
+
+    <!-- Pop up User -->
+    <div id="popupOverlay" class="fixed bg-black bg-opacity-60 top-0 left-0 w-screen h-screen hidden justify-center items-center">
+      <div class="flex flex-col gap-2 justify-center items-center bg-[radial-gradient(circle_at_center,_#0B0214_0%,_#3D0A6D_200%)] p-10 w-1/3 h-1/3 rounded-2xl ">
+        <div class="flex justify-center items-center h-full">
+          <img src="${user.photo}" class="w-13 h-13 rounded-full border-2 border-yellow-400" />
+        </div>
+        <span class="text-2x1 font-semibold">Hi, ${user.name}!</span>
+        <button id="logoutBtn" class=" px-4 py-2 bg-red-500 hover:bg-red-600 rounded-xl">Logout</button>
+        <button id="closeBtn" class="">Close</button>
+      </div>
+    </div>
 
     <!-- Hero -->
     <section class="">
@@ -48,21 +59,32 @@ function renderHomePage(user) {
     </div>
   `);
 
-  // Tutup modal jika klik di luar box
-  profileModal.addEventListener("click", (e) => {
-    if (e.target === profileModal) {
-      profileModal.classList.add("hidden");
-      profileModal.classList.remove("flex");
+  const $popupOverlay = $("#popupOverlay");
+
+  // buka popup
+  $("#openBtn").on("click", function () {
+    $popupOverlay.removeClass("hidden").addClass("flex");
+  });
+
+  // tutup popup
+  $("#closeBtn").on("click", function () {
+    $popupOverlay.addClass("hidden").removeClass("flex");
+  });
+
+  // klik luar card → tutup popup
+  $popupOverlay.on("click", function (e) {
+    if (e.target === this) {
+      $popupOverlay.addClass("hidden").removeClass("flex");
     }
   });
 
-  // Tambahkan event logout
+  // logout
   $("#logoutBtn").on("click", function () {
     localStorage.removeItem("cineviewUser");
     window.location.hash = "#login";
   });
 
-  // Event search, dsb (panggil fungsi dari search.js atau movies.js)
+  // event search
   $(".search-button").on("click", function () {
     searchMovies($(".input-keyword").val());
   });
@@ -74,7 +96,7 @@ function renderHomePage(user) {
     }, 500);
   });
 
-  // Close modal
+  // close modal detail movie
   $(document).on("click", ".close-modal", function () {
     $("#movieDetailModal").addClass("hidden").removeClass("flex");
   });
