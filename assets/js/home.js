@@ -12,10 +12,10 @@ function renderHomePage(user) {
       </nav>
 
       <!-- Search -->
-        <div class="flex w-1/4">
-          <input type="text" placeholder="Search movie..."
+        <div class="flex w-1/4 ">
+          <input type="text" placeholder="Search"
             class="input-keyword px-4 py-1 rounded-l-2xl text-gray-800 focus:outline-none" />
-          <button class="search-button bg-yellow-400 hover:bg-yellow-500 px-5 py-3 rounded-r-2xl font-bold text-gray-900">
+          <button class="search-button bg-yellow-400 hover:bg-yellow-500 px-4 py-1 rounded-r-2xl font-bold text-gray-900">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
         </div>
@@ -23,7 +23,6 @@ function renderHomePage(user) {
       <!-- User -->
       <div class="flex items-center justify-center gap-3">
         <img src="${user.photo}" class="w-10 h-10 rounded-full border-2 border-yellow-400" />
-        <span>${user.name}</span>
         <button id="logoutBtn" class="ml-4 px-4 py-2 bg-red-500 hover:bg-red-600 rounded-xl">Logout</button>
       </div>
     </header>
@@ -48,6 +47,14 @@ function renderHomePage(user) {
       </div>
     </div>
   `);
+
+  // Tutup modal jika klik di luar box
+  profileModal.addEventListener("click", (e) => {
+    if (e.target === profileModal) {
+      profileModal.classList.add("hidden");
+      profileModal.classList.remove("flex");
+    }
+  });
 
   // Tambahkan event logout
   $("#logoutBtn").on("click", function () {
