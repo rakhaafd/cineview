@@ -6,10 +6,13 @@ function handleGoogleLogin() {
       const user = result.user;
       saveUser(user);
       window.location.hash = "#home";
+
+      // ✅ SweetAlert success
+      showSuccess("Welcome back, " + (user.displayName || user.email) + "!");
     })
     .catch(err => {
       console.error("Google login gagal:", err);
-      alert("Google login gagal, coba lagi!");
+      showError("Google login gagal, coba lagi!");
     });
 }
 
@@ -19,10 +22,13 @@ function handleEmailLogin(email, password) {
       const user = result.user;
       saveUser(user);
       window.location.hash = "#home";
+
+      // ✅ SweetAlert success
+      showSuccess("Login berhasil! Selamat datang " + (user.displayName || user.email));
     })
     .catch(err => {
       console.error("Email login gagal:", err);
-      alert(err.message);
+      showError(err.message);
     });
 }
 
@@ -41,6 +47,10 @@ function saveUser(user) {
 function handleLogout() {
   firebase.auth().signOut().then(() => {
     localStorage.removeItem("cineviewUser");
+    showSuccess("Logout berhasil!"); // ✅ notifikasi toast di kanan atas
     window.location.hash = "#login";
+  }).catch(err => {
+    console.error("Logout gagal:", err);
+    showError("Logout gagal: " + err.message);
   });
 }

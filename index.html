@@ -1,30 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cineview 🎬</title>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="assets/css/style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-  </head>
-  <body class="bg-[radial-gradient(circle_at_center,_#0B0214_0%,_#3D0A6D_200%)] min-h-screen text-white">
-    <!-- Root app untuk routing -->
-    <div id="app"></div>
 
-    <!-- Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore-compat.js"></script>
-    <script src="assets/firebase/firebase-config.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cineview 🎬</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
 
-    <!-- Modular JS -->
-    <script src="assets/js/auth.js"></script>
-    <script src="assets/js/home.js"></script>
-    <script src="assets/js/router.js"></script>
-    <script src="assets/js/movies.js"></script>
-    <script src="assets/js/comments.js"></script>
-    <script src="assets/js/main.js"></script>
-  </body>
+<body class="bg-[radial-gradient(circle_at_center,_#0B0214_0%,_#3D0A6D_200%)] min-h-screen text-white">
+  <!-- Root app untuk routing -->
+  <div id="app"></div>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore-compat.js"></script>
+  <script src="assets/firebase/firebase-config.js"></script>
+
+  <!-- sweetalert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- Modular JS -->
+   <script src="assets/js/alert.js"></script>
+  <script src="assets/js/auth.js"></script>
+  <script src="assets/js/home.js"></script>
+  <script src="assets/js/router.js"></script>
+  <script src="assets/js/movies.js"></script>
+  <script src="assets/js/comments.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+
 </html>
