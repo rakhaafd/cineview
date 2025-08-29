@@ -1,6 +1,7 @@
 function renderHomePage(user) {
   $("#app").html(`
-    <header class="px-4 py-2 flex items-center justify-between sticky top-0 z-40">
+    <header class="absolute top-0 left-0 w-full px-4 py-2 flex items-center justify-between z-50 
+                  bg-black/40 backdrop-blur-sm transition-colors duration-300">
       <!-- Navbar kiri -->
       <nav class="flex gap-2 md:gap-6 items-center">
         <button class="text-2xl text-white">
@@ -18,10 +19,8 @@ function renderHomePage(user) {
         </button>
 
         <!-- Search Box -->
-        <div id="searchBox"
-            class="hidden md:flex absolute md:static right-12 md:right-0 top-1 
-                    top-0 w-40 sm:w-52 md:w-64 lg:w-72 
-                    transition-transform duration-300 transform scale-x-0 origin-right md:scale-x-100 z-50">
+        <div id="searchBox" 
+            class="flex absolute md:static right-12 md:right-0 transition-all duration-300 transform scale-x-0 md:scale-x-100 origin-right z-50 w-40 md:w-auto">
           <input type="text" placeholder="Search"
             class="input-keyword bg-gray-800 px-4 py-1 rounded-2xl text-gray-300 focus:outline-none w-full" />
         </div>
@@ -33,40 +32,11 @@ function renderHomePage(user) {
       </div>
     </header>
 
-    <!-- Pop up User -->
-    <div id="popupOverlay" class="fixed bg-black bg-opacity-60 top-0 left-0 w-screen h-screen hidden justify-center items-center z-50">
-      <div class="flex flex-col gap-4 justify-center items-center 
-                  bg-[radial-gradient(circle_at_center,_#0B0214_0%,_#3D0A6D_200%)] 
-                  p-6 sm:p-10 md:p-16 lg:p-20 
-                  w-11/12 sm:w-3/4 md:w-2/3 lg:w-1/3 
-                  h-auto rounded-2xl text-center">
-        
-        <!-- Foto user -->
-        <div class="flex justify-center items-center">
-          <img src="${user.photo}" class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full border-2 border-yellow-400 object-cover" />
-        </div>
-
-        <!-- Nama user -->
-        <span class="text-xl text-2xl font-semibold text-white">
-          Hi, ${user.name}!
-        </span>
-
-        <!-- Tombol -->
-        <div class="flex gap-3 mt-4 flex-wrap justify-center">
-          <button id="logoutBtn" class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-xl text-sm sm:text-base">
-            Logout
-          </button>
-          <button id="closeBtn" class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-xl text-sm sm:text-base">
-            Close
-          </button>
-        </div>
-      </div>
-    </div>
-
-
     <!-- Hero -->
-    <section class="">
+    <section class="bg-[url('https://idseducation.com/wp-content/uploads/2024/10/Contoh-desain-grafis-dan-film-poster-film-inception-840x430.jpg')] 
+                    h-[70vh] bg-cover bg-center">
     </section>
+
 
     <!-- Movie Cards -->
     <section class="px-6 mt-10">
