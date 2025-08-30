@@ -1,3 +1,4 @@
+//router.js
 function router() {
   const hash = window.location.hash || "#login";
   const user = JSON.parse(localStorage.getItem("cineviewUser"));
@@ -75,6 +76,9 @@ function router() {
       return;
     }
     renderHomePage(user);
+  }
+  if (hash === "#genre") {
+    renderGenrePage();
   }
 }
 

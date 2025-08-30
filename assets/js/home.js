@@ -1,31 +1,64 @@
+// home.js
 function renderHomePage(user) {
   $("#app").html(`
-    <header class="py-6 text-center">
-      <h1 class="text-5xl font-extrabold drop-shadow-lg">
-        Cine<span class="text-yellow-300">view</span> 🎬
-      </h1>
-      <p class="mt-2 text-lg opacity-90">Find your favorite movies instantly</p>
-      <div class="mt-4 flex items-center justify-center gap-3">
-        <img src="${user.photo}" class="w-10 h-10 rounded-full border-2 border-yellow-400" />
-        <span>Welcome, ${user.name}</span>
-        <button id="logoutBtn" class="ml-4 px-4 py-2 bg-red-500 hover:bg-red-600 rounded-xl">Logout</button>
+    <!-- Navbar -->
+    <header class="px-6 py-3 flex items-center justify-between bg-[radial-gradient(circle_at_center,_#0B0214_0%,_#3D0A6D_200%)] shadow-lg sticky top-0 z-50">
+      <!-- Left: Logo -->
+      <div class="flex items-center gap-2">
+        <h1 class="text-2xl font-extrabold text-white drop-shadow-lg cursor-pointer" id="logoBtn">
+          Cine<span class="text-yellow-300">view</span>🎬
+        </h1>
+      </div>
+
+      <!-- Middle: Navigation -->
+      <nav class="hidden md:flex gap-6 text-gray-300 font-semibold">
+        <div class="group relative cursor-pointer" id="menuMovie">
+          Movie
+          <div class="absolute hidden group-hover:flex flex-col bg-gray-900 mt-2 rounded-lg shadow-lg py-2 w-40">
+            <button id="mostWatchedBtn" class="px-4 py-2 hover:bg-purple-700 text-left">Most Watched</button>
+            <button id="mostPopularBtn" class="px-4 py-2 hover:bg-purple-700 text-left">Most Popular</button>
+          </div>
+        </div>
+        <button id="menuGenre" class="hover:text-yellow-300">Genre</button>
+        <button id="menuYear" class="hover:text-yellow-300">Year</button>
+        <button id="menuType" class="hover:text-yellow-300">Type</button>
+        <button id="menuCountry" class="hover:text-yellow-300">Country</button>
+      </nav>
+
+      <!-- Right: Search + User -->
+      <div class="flex items-center gap-4">
+        <div class="flex">
+          <input type="text" placeholder="Search"
+            class="input-keyword px-4 py-1 rounded-l-2xl text-gray-800 focus:outline-none w-40 md:w-56" />
+          <button class="search-button bg-yellow-400 hover:bg-yellow-500 px-4 py-1 rounded-r-2xl font-bold text-gray-900">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+        <button id="openBtn" class="flex items-center justify-center gap-2">
+          <img src="${user.photo}" class="w-10 h-10 rounded-full border-2 border-yellow-400" />
+        </button>
       </div>
     </header>
 
-    <!-- Search -->
-    <section class="flex justify-center mt-6">
-      <div class="flex w-3/4 md:w-1/2">
-        <input type="text" placeholder="Search movie..."
-          class="input-keyword flex-1 px-4 py-3 rounded-l-2xl text-gray-800 focus:outline-none" />
-        <button class="search-button bg-yellow-400 hover:bg-yellow-500 px-5 py-3 rounded-r-2xl font-bold text-gray-900">
-          Search
-        </button>
-      </div>
+    <!-- Hero -->
+    <section class="px-6 mt-6 text-white">
+      <h2 class="text-2xl font-bold mb-4">Featured Movies</h2>
+      <div id="featured" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
     </section>
 
-    <!-- Movie Cards -->
-    <section class="px-6 mt-10">
-      <div class="movie-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+    <section class="px-6 mt-10 text-white">
+      <h2 class="text-2xl font-bold mb-4">Anime</h2>
+      <div id="anime" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+    </section>
+
+    <section class="px-6 mt-10 text-white">
+      <h2 class="text-2xl font-bold mb-4">Korean Drama</h2>
+      <div id="kdrama" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+    </section>
+
+    <section class="px-6 mt-10 text-white">
+      <h2 class="text-2xl font-bold mb-4">TV Series</h2>
+      <div id="tvseries" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
     </section>
 
     <!-- Modal -->
@@ -40,26 +73,73 @@ function renderHomePage(user) {
     </div>
   `);
 
-  // Tambahkan event logout
-  $("#logoutBtn").on("click", function () {
-    localStorage.removeItem("cineviewUser");
-    window.location.hash = "#login";
-  });
+  // === Helper load movies with rating filter ===
+  function loadMoviesByKeywords(containerId, keywords) {
+    const container = $("#" + containerId);
+    container.html("<p>Loading...</p>");
+    const allMovies = [];
+    let completed = 0;
 
-  // Event search, dsb (panggil fungsi dari search.js atau movies.js)
-  $(".search-button").on("click", function () {
-    searchMovies($(".input-keyword").val());
-  });
+    keywords.forEach(keyword => {
+      $.ajax({
+        url: `https://www.omdbapi.com/?apikey=${apiKey}&s=${keyword}`,
+        success: res => {
+          completed++;
+          if (res.Response === "True") {
+            const requests = res.Search.map(f =>
+              $.ajax({ url: `https://www.omdbapi.com/?apikey=${apiKey}&i=${f.imdbID}` })
+            );
 
-  $(".input-keyword").on("keyup", function () {
-    clearTimeout(window.typingTimer);
-    window.typingTimer = setTimeout(() => {
-      searchMovies($(this).val());
-    }, 500);
-  });
+            $.when(...requests).done((...details) => {
+              details.forEach(d => {
+                const movie = Array.isArray(d) ? d[0] : d;
+                if (movie && parseFloat(movie.imdbRating) >= 7.0) { // Filter rating >= 7
+                  allMovies.push(movie);
+                }
+              });
 
-  // Close modal
-  $(document).on("click", ".close-modal", function () {
-    $("#movieDetailModal").addClass("hidden").removeClass("flex");
-  });
+              if (completed === keywords.length) {
+                if (allMovies.length) {
+                  container.html(allMovies.map(showCards).join(""));
+                  attachDetailButtons();
+                } else {
+                  container.html("<p class='col-span-full text-center text-xl font-semibold'>No movies found</p>");
+                }
+              }
+            });
+          } else if (completed === keywords.length && allMovies.length === 0) {
+            container.html("<p class='col-span-full text-center text-xl font-semibold'>No movies found</p>");
+          }
+        }
+      });
+    });
+  }
+
+  // === Load all sections ===
+  loadMoviesByKeywords("featured", ["love", "adventure", "action"]);
+  loadMoviesByKeywords("anime", ["naruto", "one piece", "attack on titan"]);
+  loadMoviesByKeywords("kdrama", ["squid game", "crash landing on you", "all of us are dead"]);
+  loadMoviesByKeywords("tvseries", ["breaking bad", "game of thrones", "stranger things"]);
+
+  // === Detail Button ===
+  function attachDetailButtons() {
+    $(".modal-detail-button").off("click").on("click", function () {
+      $.ajax({
+        url: `https://www.omdbapi.com/?apikey=${apiKey}&i=${$(this).data("imdbid")}`,
+        success: m => {
+          $(".modal-body").html(showMovieDetail(m));
+          $("#movieDetailModal").removeClass("hidden").addClass("flex");
+          loadComments(m.imdbID);
+        }
+      });
+    });
+  }
+
+  // === Navbar buttons ===
+  $("#menuGenre").on("click", () => window.location.hash = "#genre");
+  $("#menuYear").on("click", () => window.location.hash = "#year");
+  $("#menuType").on("click", () => window.location.hash = "#type");
+  $("#menuCountry").on("click", () => window.location.hash = "#country");
+
+  $(document).on("click", ".close-modal", () => $("#movieDetailModal").addClass("hidden").removeClass("flex"));
 }

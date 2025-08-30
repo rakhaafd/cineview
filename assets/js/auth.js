@@ -44,3 +44,9 @@ function handleLogout() {
     window.location.hash = "#login";
   });
 }
+
+// Ambil user dari localStorage
+function getUser() {
+  const userData = localStorage.getItem("cineviewUser");
+  return userData ? JSON.parse(userData) : null;
+}
