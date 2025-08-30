@@ -93,7 +93,7 @@ function renderHomePage(user) {
             $.when(...requests).done((...details) => {
               details.forEach(d => {
                 const movie = Array.isArray(d) ? d[0] : d;
-                if (movie && parseFloat(movie.imdbRating) >= 7.0) { // Filter rating >= 7
+                if (movie && parseFloat(movie.imdbRating) >= 8.0) { // Filter rating >= 8
                   allMovies.push(movie);
                 }
               });
