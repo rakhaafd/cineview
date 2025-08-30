@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cineview 🎬</title>
+    <link rel="stylesheet" href="../../assets/css/style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body
+    class="flex items-center justify-center min-h-screen bg-[url(/assets/img/bg-lgn.jpg)] text-white"
+  >
+    <div
+      class="bg-[radial-gradient(circle_at_center,_#0B0214_0%,_#3D0A6D_200%)] p-8 rounded-2xl shadow-lg max-w-md w-full text-center"
+    >
+      <h1 class="text-3xl font-bold mb-4">
+        Welcome to <span class="text-purple-600">Cineview🎬</span>
+      </h1>
+      <p class="mb-8 text-gray-500">
+        Sign in with your Google account to rate and discover your favorite
+        movies 🎬
+      </p>
+      <button
+        id="googleLoginBtn"
+        class="w-full flex items-center justify-center gap-3 bg-gray-800 text-white py-3 rounded-xl hover:bg-gray-700 transition"
+      >
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png"
+          class="w-6 h-6"
+          alt="Google"
+        />
+        Sign in with Google
+      </button>
+    </div>
+
+    <!-- Firebase + jQuery -->
+    <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth-compat.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="../../assets/firebase/firebase-config.js"></script>
+    <script src="../../assets/js/login.js"></script>
+  </body>
+</html>
