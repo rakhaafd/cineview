@@ -1,5 +1,5 @@
 // movies.js
-const apiKey = "249668bd";
+const apiKey = "44388df1";
 
 function searchMovies(keyword) {
   if (keyword.trim() === "") {
