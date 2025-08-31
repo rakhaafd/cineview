@@ -1,5 +1,7 @@
-// main.js
+// assets/js/main.js
+import { router } from "./router.js";
+
 $(document).ready(function () {
-  router(); 
+  router();
   $(window).on("hashchange", router);
 });

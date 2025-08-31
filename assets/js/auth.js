@@ -1,5 +1,7 @@
-// Auth related
-function handleGoogleLogin() {
+// ============ AUTH FUNCTIONS ============
+
+// 🔹 Google Login
+export function handleGoogleLogin() {
   const provider = new firebase.auth.GoogleAuthProvider();
   firebase.auth().signInWithPopup(provider)
     .then(result => {
@@ -16,7 +18,8 @@ function handleGoogleLogin() {
     });
 }
 
-function handleEmailLogin(email, password) {
+// 🔹 Email Login
+export function handleEmailLogin(email, password) {
   firebase.auth().signInWithEmailAndPassword(email, password)
     .then(result => {
       const user = result.user;
@@ -32,22 +35,37 @@ function handleEmailLogin(email, password) {
     });
 }
 
-function handleEmailRegister(email, password) {
+// 🔹 Email Register
+export function handleEmailRegister(email, password) {
   return firebase.auth().createUserWithEmailAndPassword(email, password);
 }
 
+// 🔹 Simpan user ke localStorage
 function saveUser(user) {
   localStorage.setItem("cineviewUser", JSON.stringify({
-    name: user.displayName || user.email,  // kalau email login, default pakai email
+    name: user.displayName || user.email,  
     email: user.email,
     photo: user.photoURL || "https://ui-avatars.com/api/?name=" + encodeURIComponent(user.email)
   }));
 }
 
+// 🔹 Ambil user dari localStorage
+function getUser() {
+  const stored = localStorage.getItem("cineviewUser");
+  if (!stored) return null;
+  try {
+    return JSON.parse(stored);
+  } catch (err) {
+    console.error("Error parsing cineviewUser:", err);
+    return null;
+  }
+}
+
+// 🔹 Logout user
 function handleLogout() {
   firebase.auth().signOut().then(() => {
     localStorage.removeItem("cineviewUser");
-    showSuccess("Logout berhasil!"); // ✅ notifikasi toast di kanan atas
+    showSuccess("Logout berhasil!");
     window.location.hash = "#login";
   }).catch(err => {
     console.error("Logout gagal:", err);

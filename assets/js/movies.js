@@ -1,44 +1,52 @@
 // movies.js
-const apiKey = "44388df1";
-
-function searchMovies(keyword) {
+function searchMovies(keyword, genre = "", year = "", country = "") {
   if (keyword.trim() === "") {
     $(".movie-container").html("");
     return;
   }
 
+  $(".movie-container").html("<p>Loading...</p>");
+
   $.ajax({
     url: `https://www.omdbapi.com/?apikey=${apiKey}&s=${keyword}`,
     success: (results) => {
       if (results.Response === "True") {
-        const cards = results.Search.map(showCards).join("");
-        $(".movie-container").html(cards);
+        const requests = results.Search.map(f =>
+          $.ajax({ url: `https://www.omdbapi.com/?apikey=${apiKey}&i=${f.imdbID}` })
+        );
 
-        $(".modal-detail-button").on("click", function () {
-          $.ajax({
-            url: `https://www.omdbapi.com/?apikey=${apiKey}&i=${$(this).data("imdbid")}`,
-            success: (m) => {
-              $(".modal-body").html(showMovieDetail(m));
-              $("#movieDetailModal").removeClass("hidden").addClass("flex");
-              loadComments(m.imdbID);
-            },
-          });
+        $.when(...requests).done((...details) => {
+          let movies = details.map(d => Array.isArray(d) ? d[0] : d);
+
+          // Apply filters
+          if (genre) movies = movies.filter(m => m.Genre && m.Genre.includes(genre));
+          if (year) movies = movies.filter(m => m.Year && m.Year.includes(year));
+          if (country) movies = movies.filter(m => m.Country && m.Country.includes(country));
+
+          if (movies.length) {
+            $(".movie-container").html(movies.map(showCards).join(""));
+            attachDetailButtons();
+          } else {
+            $(".movie-container").html(`<p class="col-span-full text-center text-xl font-semibold">❌ No movies found</p>`);
+          }
         });
       } else {
         $(".movie-container").html(`<p class="col-span-full text-center text-xl font-semibold">❌ Movie not found</p>`);
       }
-    },
+    }
   });
 }
 
 function showCards(m) {
   return `
     <div class="bg-white text-gray-900 rounded-2xl shadow-lg overflow-hidden hover:scale-105 transform transition">
-      <img src="${m.Poster != "N/A" ? m.Poster : "https://via.placeholder.com/300x400"}" alt="${m.Title}" class="w-full h-80 object-cover">
+      <img src="${m.Poster != "N/A" ? m.Poster : "https://via.placeholder.com/300x400"}" 
+           alt="${m.Title}" class="w-full h-80 object-cover">
       <div class="p-4">
         <h3 class="text-lg font-bold truncate">${m.Title}</h3>
         <p class="text-sm text-gray-600">${m.Year}</p>
-        <button data-imdbid="${m.imdbID}" class="modal-detail-button mt-3 w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 rounded-xl">
+        <button data-imdbid="${m.imdbID}" 
+          class="modal-detail-button mt-3 w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 rounded-xl">
           Show Details
         </button>
       </div>
@@ -54,7 +62,8 @@ function showMovieDetail(m) {
   return `
     <div class="flex flex-col md:flex-row gap-8">
       <div class="flex-shrink-0">
-        <img src="${m.Poster != "N/A" ? m.Poster : "https://via.placeholder.com/300x400"}" alt="${m.Title}" class="w-64 rounded-2xl shadow-lg object-cover border-4 border-purple-600">
+        <img src="${m.Poster != "N/A" ? m.Poster : "https://via.placeholder.com/300x400"}" 
+             alt="${m.Title}" class="w-64 rounded-2xl shadow-lg object-cover border-4 border-purple-600">
       </div>
       <div class="flex-1 space-y-3">
         <h3 class="text-3xl font-extrabold text-yellow-300">${m.Title} <span class="text-white">(${m.Year})</span></h3>
@@ -78,9 +87,23 @@ function showMovieDetail(m) {
       <h4 class="text-xl font-bold text-yellow-300 mb-3">💬 Comments</h4>
       <div id="commentsList" class="space-y-3 mb-4"></div>
       <form id="commentForm" class="flex gap-2">
-        <input type="text" id="commentInput" placeholder="Write a comment..." class="flex-1 px-4 py-2 rounded-xl text-gray-800 focus:outline-none" required>
+        <input type="text" id="commentInput" placeholder="Write a comment..." 
+               class="flex-1 px-4 py-2 rounded-xl text-gray-800 focus:outline-none" required>
         <button type="submit" class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-xl">Send</button>
       </form>
     </div>
   `;
+}
+
+function attachDetailButtons() {
+  $(".modal-detail-button").off("click").on("click", function () {
+    $.ajax({
+      url: `https://www.omdbapi.com/?apikey=${apiKey}&i=${$(this).data("imdbid")}`,
+      success: m => {
+        $(".modal-body").html(showMovieDetail(m));
+        $("#movieDetailModal").removeClass("hidden").addClass("flex");
+        loadComments(m.imdbID);
+      }
+    });
+  });
 }

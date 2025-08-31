@@ -1,5 +1,5 @@
-// home.js (Landing Page)
-function renderHomePage(user) {
+// home.js (Landing Page dengan Profile + Logout)
+export function renderHomePage(user) {
   $("#app").html(`
     <!-- Navbar -->
     <header class="px-6 py-3 flex items-center justify-between bg-gradient-to-r from-purple-800 to-indigo-900 shadow-lg sticky top-0 z-50">
@@ -14,8 +14,19 @@ function renderHomePage(user) {
         <a href="#search" class="hover:text-yellow-300">Search Movies</a>
         <a href="#login" class="hover:text-yellow-300">Login/Register</a>
       </nav>
-      <div class="flex items-center gap-2">
-        <img src="${user.photo}" class="w-10 h-10 rounded-full border-2 border-yellow-400" />
+
+      <!-- Profile Dropdown -->
+      <div class="relative">
+        <button id="profileBtn" class="flex items-center gap-2">
+          <img src="${user.photo}" class="w-10 h-10 rounded-full border-2 border-yellow-400" />
+        </button>
+        <div id="profileMenu" class="hidden absolute right-0 mt-2 w-48 bg-gray-800 text-white rounded-lg shadow-lg overflow-hidden">
+          <div class="px-4 py-3 border-b border-gray-700">
+            <p class="font-semibold">${user.email}</p>
+          </div>
+          <button id="viewProfile" class="block w-full text-left px-4 py-2 hover:bg-purple-700">Profile</button>
+          <button id="logoutBtn" class="block w-full text-left px-4 py-2 hover:bg-red-600">Logout</button>
+        </div>
       </div>
     </header>
 
@@ -71,6 +82,22 @@ function renderHomePage(user) {
       <p>&copy; 2025 Cineview 🎬. All Rights Reserved.</p>
     </footer>
   `);
+
+  // Toggle dropdown profile
+  $("#profileBtn").on("click", () => {
+    $("#profileMenu").toggleClass("hidden");
+  });
+
+  // View Profile
+  $("#viewProfile").on("click", () => {
+    alert("Profile page belum dibuat, bisa ditambahkan hash #profile nanti.");
+  });
+
+  // Logout
+  $("#logoutBtn").on("click", () => {
+    localStorage.removeItem("cineviewUser");
+    window.location.hash = "#login";
+  });
 
   // Contact form event
   $("#contactForm").on("submit", function (e) {
