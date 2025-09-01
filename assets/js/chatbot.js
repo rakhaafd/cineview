@@ -1,4 +1,3 @@
-// assets/js/chatbot.js
 import { initCineBot } from "../gemini/gemini.js";
 
 let model = null;
@@ -7,11 +6,14 @@ let messages = { history: [] };
 (async () => {
   await initCineBot();
   model = window.CineBotModel;
-  console.log("✅ CineBot siap dipakai");
+  console.log("✅ CineBot ready to use");
 })();
 
 export function initializeChatbot() {
   console.log("🎬 CineBot UI initialized");
+  
+  // Show default message immediately
+  appendMessage("bot", "Hi there! How can I help you find a movie, TV series, or anime today?");
 
   $("#chatbotToggle").on("click", () => {
     $("#chatbotPopup").toggleClass("hidden flex");
@@ -31,7 +33,7 @@ export function initializeChatbot() {
 
   async function handleSend() {
     if (!model) {
-      appendMessage("bot", "⚠️ Model belum siap, coba lagi sebentar...");
+      appendMessage("bot", "⚠️ Model not ready. Please wait a moment...");
       return;
     }
 
