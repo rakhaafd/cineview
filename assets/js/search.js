@@ -29,7 +29,7 @@ export function renderSearchPage(user) {
 
         <!-- Logout Button -->
         <div class="p-6 border-t border-purple-700">
-          <button id="logoutBtn"
+          <button id="logoutBtnMobile"
             class="w-full py-2 px-4 rounded-lg bg-red-600 hover:bg-red-700 transition">
             <i class="fa-solid fa-right-from-bracket mr-2"></i> Logout
           </button>
@@ -162,7 +162,7 @@ export function renderSearchPage(user) {
   `);
 
   // Override desktop navbar links to point to #home
-  $("nav a").each(function() {
+  $("nav a").each(function () {
     const text = $(this).text();
     if (["Home", "About", "Features", "Testimony", "FAQ"].includes(text)) {
       $(this).attr("href", "#home");
@@ -239,11 +239,6 @@ export function renderSearchPage(user) {
     $("#profileMenu").toggleClass("hidden");
   });
 
-  // View Profile
-  $("#viewProfile").on("click", () => {
-    alert("Profile page belum dibuat, bisa ditambahkan hash #profile nanti.");
-  });
-
   // === Profile dropdown (FIX) ===
   $("#profileBtn")
     .off("click")
@@ -268,8 +263,15 @@ export function renderSearchPage(user) {
       if (e.key === "Escape") $("#profileMenu").addClass("hidden");
     });
 
-  // Logout
-  $("#logoutBtn").on("click", () => {
+  // Profile & Logout
+  $("#viewProfile").on("click", () => {
+    console.log("📄 View profile clicked");
+    alert("Profile page belum dibuat, bisa ditambahkan hash #profile nanti.");
+  });
+
+  // Logout untuk desktop & mobile
+  $("#logoutBtn, #logoutBtnMobile").on("click", () => {
+    console.log("🚪 Logout clicked");
     localStorage.removeItem("cineviewUser");
     window.location.hash = "#login";
   });

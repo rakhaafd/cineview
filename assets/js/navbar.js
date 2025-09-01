@@ -22,12 +22,14 @@ export function renderNavbar(user) {
           <button id="profileBtn" class="flex items-center gap-2">
             <img src="${user.photo}" class="w-10 h-10 rounded-full border-2 border-yellow-400 shadow-md" />
           </button>
-          <div id="profileMenu" class="hidden absolute right-0 mt-2 w-52 bg-gray-800 text-white rounded-xl shadow-lg overflow-hidden">
+          <div id="profileMenu" 
+             class="hidden absolute right-0 mt-2 bg-gray-800 text-white rounded-xl shadow-lg overflow-hidden min-w-fit">
             <div class="px-4 py-3 border-b border-gray-700">
-              <p class="font-semibold">${user.email}</p>
+              <p class="font-semibold whitespace-nowrap">${user.email}</p>
             </div>
-            <button id="viewProfile" class="block w-full text-left px-4 py-2 hover:bg-purple-700">Profile</button>
-            <button id="logoutBtn" class="block w-full text-left px-4 py-2 hover:bg-red-600">Logout</button>
+            <button id="logoutBtn" class="block w-full text-left px-4 py-2 hover:bg-red-600">
+              Logout
+            </button>
           </div>
         </div>
       </div>

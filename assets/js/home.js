@@ -1,6 +1,6 @@
-import { renderNavbar } from './navbar.js';
-import { initializeChatbot } from './chatbot.js';
-import { initCineBot } from '../gemini/gemini.js';
+import { renderNavbar } from "./navbar.js";
+import { initializeChatbot } from "./chatbot.js";
+import { initCineBot } from "../gemini/gemini.js";
 
 export async function renderHomePage(user) {
   $("#app").html(`
@@ -23,7 +23,7 @@ export async function renderHomePage(user) {
           <a href="#search" class="hover:text-yellow-400">Search</a>
         </nav>
         <div class="p-6 border-t border-purple-700">
-          <button id="logoutBtn"
+          <button id="logoutBtnMobile"
             class="w-full py-2 px-4 rounded-lg bg-red-600 hover:bg-red-700 transition">
             <i class="fa-solid fa-right-from-bracket mr-2"></i> Logout
           </button>
@@ -326,23 +326,29 @@ export async function renderHomePage(user) {
   });
 
   // Profile Dropdown
-  $("#profileBtn").off("click").on("click", function (e) {
-    console.log("👤 Profile button clicked");
-    e.stopPropagation();
-    $("#profileMenu").toggleClass("hidden");
-  });
-  $(document).off("click.profile").on("click.profile", function (e) {
-    if (!$(e.target).closest("#profileBtn, #profileMenu").length) {
-      console.log("🖱️ Clicked outside profile menu");
-      $("#profileMenu").addClass("hidden");
-    }
-  });
-  $(document).off("keydown.profile").on("keydown.profile", function (e) {
-    if (e.key === "Escape") {
-      console.log("🔙 Escape key pressed for profile menu");
-      $("#profileMenu").addClass("hidden");
-    }
-  });
+  $("#profileBtn")
+    .off("click")
+    .on("click", function (e) {
+      console.log("👤 Profile button clicked");
+      e.stopPropagation();
+      $("#profileMenu").toggleClass("hidden");
+    });
+  $(document)
+    .off("click.profile")
+    .on("click.profile", function (e) {
+      if (!$(e.target).closest("#profileBtn, #profileMenu").length) {
+        console.log("🖱️ Clicked outside profile menu");
+        $("#profileMenu").addClass("hidden");
+      }
+    });
+  $(document)
+    .off("keydown.profile")
+    .on("keydown.profile", function (e) {
+      if (e.key === "Escape") {
+        console.log("🔙 Escape key pressed for profile menu");
+        $("#profileMenu").addClass("hidden");
+      }
+    });
 
   // Carousel
   let currentSlide = 0;
@@ -354,7 +360,9 @@ export async function renderHomePage(user) {
   }
   function updateDots() {
     $(".dot").removeClass("bg-yellow-400").addClass("bg-gray-400");
-    $(`.dot[data-index='${currentSlide}']`).removeClass("bg-gray-400").addClass("bg-yellow-400");
+    $(`.dot[data-index='${currentSlide}']`)
+      .removeClass("bg-gray-400")
+      .addClass("bg-yellow-400");
   }
   $(".dot").on("click", function () {
     console.log("🔵 Carousel dot clicked:", $(this).data("index"));
@@ -371,7 +379,9 @@ export async function renderHomePage(user) {
     console.log("📄 View profile clicked");
     alert("Profile page belum dibuat, bisa ditambahkan hash #profile nanti.");
   });
-  $("#logoutBtn").on("click", () => {
+
+  // Logout untuk desktop & mobile
+  $("#logoutBtn, #logoutBtnMobile").on("click", () => {
     console.log("🚪 Logout clicked");
     localStorage.removeItem("cineviewUser");
     window.location.hash = "#login";
