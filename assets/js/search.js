@@ -135,7 +135,7 @@ export function renderSearchPage(user) {
       <!-- Chatbot Popup -->
       <div id="chatbotPopup" class="hidden fixed bottom-20 right-6 w-96 max-w-[90vw] h-[500px] bg-gray-800 rounded-xl shadow-2xl z-50 flex flex-col">
         <div class="bg-gradient-to-r from-[#4C1D95] to-[#DB2777] px-4 py-3 flex justify-between items-center rounded-t-xl">
-          <h3 id="logoBtn" class="text-white font-bold text-lg">CineBot 🤖</h3>
+          <h3 id="cineBot" class="text-white font-bold text-lg">CineBot 🤖</h3>
           <button id="chatbotClose" class="text-white hover:text-yellow-300 text-xl font-semibold transition-colors">✖</button>
         </div>
         <div id="chatbotMessages" class="flex-1 p-4 overflow-y-auto bg-gray-900 text-gray-200 flex flex-col gap-3">

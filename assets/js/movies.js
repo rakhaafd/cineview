@@ -56,7 +56,7 @@ function showCards(m) {
         <p class="text-sm text-gray-400">${m.Year}</p>
         <button data-imdbid="${m.imdbID}" 
                 class="modal-detail-button mt-3 w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 rounded-xl transition-colors">
-          More Details
+          Movie Details
         </button>
       </div>
     </div>

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Barrio&family=Lexend+Deca:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barriecito&family=Barrio&family=Lexend+Deca:wght@100..900&display=swap');
 
 * {
   font-family: "Lexend Deca";
@@ -8,6 +8,10 @@
 
 #logoBtn {
   font-family: "Barrio";
+}
+
+#cineBot {
+  font-family: "Barriecito";
 }
 
 .modal {
