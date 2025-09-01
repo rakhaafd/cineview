@@ -78,7 +78,7 @@ export function renderHomePage(user) {
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20 px-6 bg-gradient-to-r from-[#8900f2]/80 via-[#a100f2]/80 to-[#b100e8]/80 text-white">
+    <section id="about" class="py-20 px-6  bg-gradient-to-r from-purple-900 via-violet-900 to-indigo-950 text-white">
       <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
         <div>
           <h2 class="text-4xl font-bold mb-6">About Us</h2>
@@ -94,7 +94,7 @@ export function renderHomePage(user) {
     </section>
 
     <!-- Testimony Section (Carousel) -->
-    <section id="testimony" class="py-20 px-6 bg-gradient-to-r from-purple-950 to-indigo-900 text-white">
+    <section id="testimony" class="py-20 px-6 bg-gradient-to-r from-indigo-950 via-purple-950 to-violet-930 text-white">
       <h2 class="text-4xl font-bold mb-12 text-center">What Our Users Say</h2>
       
       <div class="relative max-w-3xl mx-auto overflow-hidden">
@@ -130,7 +130,7 @@ export function renderHomePage(user) {
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-20 px-6 bg-gradient-to-r from-indigo-900 via-purple-900 to-indigo-950 text-white">
+    <section id="features" class="py-20 px-6 bg-gradient-to-r from-purple-950 via-violet-900 to-indigo-950 text-white">
       <div class="max-w-6xl mx-auto text-center mb-12">
         <h2 class="text-4xl font-bold">Why Choose Cineview?</h2>
         <p class="text-lg text-gray-300 mt-4">Discover what makes Cineview your best choice for exploring movies.</p>
@@ -161,7 +161,7 @@ export function renderHomePage(user) {
     </section>
 
     <!-- FAQ Section -->
-    <section id="faq" class="py-20 px-6 bg-gradient-to-r from-purple-950 to-indigo-900">
+    <section id="faq" class="py-20 px-6 bg-gradient-to-r from-indigo-950 via-purple-900 to-violet-950">
       <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-12 items-start text-white">
         
         <!-- Left (Accordion FAQ) -->
@@ -219,7 +219,7 @@ export function renderHomePage(user) {
 
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 px-6 bg-gradient-to-r from-purple-900 via-purple-800 to-indigo-900 text-white">
+    <section id="contact" class="py-20 px-6 bg-gradient-to-r from-purple-900 via-violet-900 to-indigo-950 text-white">
       <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
         
         <!-- Contact Info -->
