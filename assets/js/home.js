@@ -279,10 +279,29 @@ export function renderHomePage(user) {
     $("#mobileMenu").removeClass("translate-x-0").addClass("translate-x-full");
   });
 
-  // Profile dropdown toggle
-  $("#profileBtn").on("click", function () {
-    $("#profileMenu").toggleClass("hidden");
-  });
+  // === Profile dropdown (FIX) ===
+  $("#profileBtn")
+    .off("click")
+    .on("click", function (e) {
+      e.stopPropagation(); // cegah bubbling, biar nggak ketutup lagi
+      $("#profileMenu").toggleClass("hidden");
+    });
+
+  // Tutup saat klik di luar menu
+  $(document)
+    .off("click.profile")
+    .on("click.profile", function (e) {
+      if (!$(e.target).closest("#profileBtn, #profileMenu").length) {
+        $("#profileMenu").addClass("hidden");
+      }
+    });
+
+  // Tutup saat tekan Escape
+  $(document)
+    .off("keydown.profile")
+    .on("keydown.profile", function (e) {
+      if (e.key === "Escape") $("#profileMenu").addClass("hidden");
+    });
 
   // Simple Carousel Script
   let currentSlide = 0;
@@ -315,11 +334,6 @@ export function renderHomePage(user) {
 
   // Initial dot update
   updateDots();
-
-  // Toggle dropdown profile
-  $("#profileBtn").on("click", () => {
-    $("#profileMenu").toggleClass("hidden");
-  });
 
   // View Profile
   $("#viewProfile").on("click", () => {

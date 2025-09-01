@@ -216,11 +216,29 @@ export function renderSearchPage(user) {
     alert("Profile page belum dibuat, bisa ditambahkan hash #profile nanti.");
   });
 
-  // Logout
-  $("#logoutBtn").on("click", () => {
-    localStorage.removeItem("cineviewUser");
-    window.location.hash = "#login";
-  });
+  // === Profile dropdown (FIX) ===
+  $("#profileBtn")
+    .off("click")
+    .on("click", function (e) {
+      e.stopPropagation(); // cegah bubbling, biar nggak ketutup lagi
+      $("#profileMenu").toggleClass("hidden");
+    });
+
+  // Tutup saat klik di luar menu
+  $(document)
+    .off("click.profile")
+    .on("click.profile", function (e) {
+      if (!$(e.target).closest("#profileBtn, #profileMenu").length) {
+        $("#profileMenu").addClass("hidden");
+      }
+    });
+
+  // Tutup saat tekan Escape
+  $(document)
+    .off("keydown.profile")
+    .on("keydown.profile", function (e) {
+      if (e.key === "Escape") $("#profileMenu").addClass("hidden");
+    });
 
   // tambahkan style animasi (seperti sebelumnya)
   const style = document.createElement("style");
