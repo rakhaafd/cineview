@@ -3,7 +3,7 @@ export function renderNavbar(user) {
     <header class="px-6 py-3 flex items-center justify-between bg-gradient-to-r from-transparent to-indigo-950/90 backdrop-blur-md shadow-lg sticky top-0 z-50">
       <!-- Logo -->
       <h1 class="text-2xl font-extrabold text-white cursor-pointer tracking-wide" id="logoBtn">
-        Cine<span class="text-yellow-400">view</span>🎬
+        Cine<span id="logoBtn" class="text-yellow-400">view.</span>
       </h1>
 
       <!-- Desktop Menu -->

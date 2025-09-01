@@ -35,7 +35,7 @@ export async function renderHomePage(user) {
         <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1524985069026-dd778a71c7b4')] 
                     bg-cover bg-center brightness-50"></div>
         <div class="relative z-10">
-          <h2 class="text-5xl md:text-6xl font-extrabold mb-6">Welcome to Cineview 🎬</h2>
+          <h2 class="text-5xl md:text-6xl font-extrabold mb-6">Welcome to <span id="logoBtn">Cine<span id="logoBtn" class="text-yellow-400">view 🎬</span></span></h2>
           <p class="text-lg md:text-xl max-w-2xl mx-auto mb-8 text-gray-200">
             Discover, search, and explore movies from around the world. Your next favorite film is just a click away.
           </p>

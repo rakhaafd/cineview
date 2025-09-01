@@ -39,7 +39,7 @@ export function renderSearchPage(user) {
       <!-- Search Section -->
       <section id="searchSection" class="flex-1 flex flex-col items-center justify-center text-center py-20 transition-all duration-500 z-10">
         <h1 class="text-5xl font-extrabold mb-4">
-          Cine<span class="text-yellow-300">view</span> 🎬
+          Lookin' for <span id="logoBtn" class="text-yellow-300">cinema</span>🎬👀?
         </h1>
         <p class="text-gray-300 mb-8 text-lg max-w-md">
           Craving a movie night? Discover top-rated films with <span class="font-bold text-yellow-300">Cineview</span> in seconds!
@@ -135,7 +135,7 @@ export function renderSearchPage(user) {
       <!-- Chatbot Popup -->
       <div id="chatbotPopup" class="hidden fixed bottom-20 right-6 w-96 max-w-[90vw] h-[500px] bg-gray-800 rounded-xl shadow-2xl z-50 flex flex-col">
         <div class="bg-gradient-to-r from-[#4C1D95] to-[#DB2777] px-4 py-3 flex justify-between items-center rounded-t-xl">
-          <h3 class="text-white font-bold text-lg">CineBot 🤖</h3>
+          <h3 id="logoBtn" class="text-white font-bold text-lg">CineBot 🤖</h3>
           <button id="chatbotClose" class="text-white hover:text-yellow-300 text-xl font-semibold transition-colors">✖</button>
         </div>
         <div id="chatbotMessages" class="flex-1 p-4 overflow-y-auto bg-gray-900 text-gray-200 flex flex-col gap-3">
