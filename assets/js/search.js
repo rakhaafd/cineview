@@ -1,48 +1,12 @@
 import { searchMovies } from "./movies.js";
 import { initializeChatbot } from "./chatbot.js";
+import { renderNavbar } from "./navbar.js";
 
 export function renderSearchPage(user) {
   $("#app").html(`
     <div class="min-h-screen bg-[radial-gradient(circle_at_30%_50%,_#0B0214_0%,_#2A0549_50%,_#4C1D95_150%)] text-white flex flex-col animated-gradient">
-      <header
-        class="px-6 py-3 flex items-center justify-between 
-              bg-gradient-to-r from-transparent to-indigo-950/90 
-              backdrop-blur-md shadow-lg sticky top-0 z-50">
-
-        <!-- Logo -->
-        <h1 class="text-2xl font-extrabold text-white cursor-pointer tracking-wide" id="logoBtn">
-          Cine<span class="text-yellow-400">view</span>🎬
-        </h1>
-
-        <!-- Desktop Menu -->
-        <nav class="hidden md:flex gap-6 text-gray-300 font-medium">
-          <a href="#home" class="hover:text-yellow-400 transition">Home</a>
-          <a href="#search" class="hover:text-yellow-400 transition">Search</a>
-        </nav>
-
-        <!-- Mobile Menu Button -->
-        <button class="md:hidden text-white text-2xl" id="menuToggle">
-          <i class="fa-solid fa-bars"></i>
-        </button>
-
-        <!-- Profile Dropdown -->
-        <div class="relative hidden md:block">
-          <button id="profileBtn" class="flex items-center gap-2">
-            <img src="${
-              user.photo
-            }" class="w-10 h-10 rounded-full border-2 border-yellow-400 shadow-md" />
-          </button>
-          <div id="profileMenu" 
-              class="hidden absolute right-0 mt-2 w-52 bg-gray-800 text-white rounded-xl shadow-lg overflow-hidden">
-            <div class="px-4 py-3 border-b border-gray-700">
-              <p class="font-semibold">${user.email}</p>
-            </div>
-            <button id="viewProfile" class="block w-full text-left px-4 py-2 hover:bg-purple-700">Profile</button>
-            <button id="logoutBtn" class="block w-full text-left px-4 py-2 hover:bg-red-600">Logout</button>
-          </div>
-        </div>
-      </header>
-
+      ${renderNavbar(user)}
+      
       <!-- Mobile Sidebar -->
       <div id="mobileMenu"
         class="fixed top-0 right-0 h-full w-64 bg-gradient-to-b from-purple-900 to-indigo-900 text-white transform translate-x-full transition-transform duration-300 z-50 md:hidden shadow-xl flex flex-col">
@@ -57,6 +21,10 @@ export function renderSearchPage(user) {
         <nav class="flex flex-col space-y-6 px-6 mt-8 text-lg font-medium flex-grow">
           <a href="#home" class="hover:text-yellow-400">Home</a>
           <a href="#search" class="hover:text-yellow-400">Search</a>
+          <a href="#about" class="hover:text-yellow-400">About</a>
+          <a href="#features" class="hover:text-yellow-400">Features</a>
+          <a href="#faq" class="hover:text-yellow-400">FAQ</a>
+          <a href="#testimony" class="hover:text-yellow-400">Testimony</a>
         </nav>
 
         <!-- Logout Button -->
