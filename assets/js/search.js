@@ -3,9 +3,9 @@ import { initializeChatbot } from "./chatbot.js";
 
 export function renderSearchPage(user) {
   $("#app").html(`
-    <div class="min-h-screen bg-[radial-gradient(circle_at_30%_50%,_#0B0214_0%,_#2A0549_50%,_#4C1D95_100%,_#DB2777_150%)] text-white flex flex-col animated-gradient relative">
-      <!-- Vibrant blurred gradient overlay -->
-      <div class="absolute inset-0 bg-[linear-gradient(135deg,_#4C1D95/30,_#DB2777/10,_transparent_50%)] backdrop-blur-sm opacity-30 z-0"></div>
+    <div class="min-h-screen bg-[radial-gradient(circle_at_30%_50%,_#0B0214_0%,_#2A0549_50%,_#4C1D95_150%)] text-white flex flex-col animated-gradient relative">
+      <!-- Vibrant blurred gradient overlay with glossy glass effect -->
+      <div class="absolute inset-0 bg-[linear-gradient(135deg,_rgba(76,29,149,0.2),_rgba(219,39,119,0.1),_transparent_50%)] backdrop-blur-md opacity-20 z-0"></div>
 
       <!-- Search Section -->
       <section id="searchSection" class="flex-1 flex flex-col items-center justify-center text-center py-20 transition-all duration-500 z-10">
@@ -104,12 +104,12 @@ export function renderSearchPage(user) {
       </button>
 
       <!-- Chatbot Popup -->
-      <div id="chatbotPopup" class="hidden fixed bottom-20 right-6 w-80 max-w-[90vw] bg-gray-800 rounded-xl shadow-2xl z-50 flex flex-col">
+      <div id="chatbotPopup" class="hidden fixed bottom-20 right-6 w-96 max-w-[90vw] bg-gray-800 rounded-xl shadow-2xl z-50 flex flex-col">
         <div class="bg-gradient-to-r from-[#4C1D95] to-[#DB2777] px-4 py-3 flex justify-between items-center rounded-t-xl">
           <h3 class="text-white font-bold text-lg">CineBot 🤖</h3>
           <button id="chatbotClose" class="text-white hover:text-yellow-300 text-xl font-semibold transition-colors">✖</button>
         </div>
-        <div id="chatbotMessages" class="flex-1 p-4 min-h-[200px] max-h-[400px] overflow-y-auto bg-gray-900 text-gray-200 flex flex-col gap-3">
+        <div id="chatbotMessages" class="flex-1 p-4 min-h-[300px] max-h-[500px] overflow-y-auto bg-gray-900 text-gray-200 flex flex-col gap-3">
           <!-- Messages will be appended here -->
         </div>
         <div class="p-4 border-t border-gray-700">
@@ -132,7 +132,7 @@ export function renderSearchPage(user) {
     </div>
   `);
 
-  // Add CSS for animations (only gradient-flow, no entry animations)
+  // Add CSS for animations and glossy glass effect
   const style = document.createElement("style");
   style.innerHTML = `
     @keyframes gradient-flow {
@@ -141,9 +141,19 @@ export function renderSearchPage(user) {
       100% { background-position: 0% 50%; }
     }
     .animated-gradient {
-      background: radial-gradient(circle at 30% 50%, #0B0214 0%, #2A0549 50%, #4C1D95 100%, #DB2777 150%);
-      background-size: 400% 400%;
-      animation: gradient-flow 6s ease-in-out infinite;
+      background: radial-gradient(circle at 30% 50%, #0B0214 0%, #2A0549 50%, #4C1D95 150%);
+      background-size: 300% 300%;
+      animation: gradient-flow 8s ease-in-out infinite;
+      position: relative;
+    }
+    .animated-gradient::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: -1;
     }
     #chatbotMessages > div {
       padding: 8px 12px;
@@ -160,6 +170,11 @@ export function renderSearchPage(user) {
       margin-right: auto;
       background-color: #1F2937;
       color: #E5E7EB;
+    }
+    @supports not (backdrop-filter: blur(10px)) {
+      .animated-gradient::before {
+        background: rgba(255, 255, 255, 0.2);
+      }
     }
   `;
   document.head.appendChild(style);
