@@ -45,8 +45,8 @@ function showCards(m) {
     <div class="bg-gray-900 text-white rounded-2xl shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/50 relative group">
       <div class="relative">
         <img src="${m.Poster !== "N/A" ? m.Poster : "https://via.placeholder.com/300x400"}" 
-             alt="${m.Title}" class="w-full h-80 object-cover opacity-90 group-hover:opacity-100 transition-opacity">
-        <div class="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent"></div>
+             alt="${m.Title}" class="w-full h-80 object-cover">
+        <div class="absolute inset-0 bg-black/40 group-hover:opacity-0 transition-opacity duration-300"></div>
         <span class="absolute top-3 left-3 bg-purple-600 text-white text-xs font-bold px-2 py-1 rounded-full">
           ⭐ ${m.imdbRating || 'N/A'}
         </span>
@@ -69,11 +69,10 @@ function showMovieDetail(m) {
     : "<li class='text-gray-400'>No ratings available</li>";
 
   return `
-    <div class="flex flex-col md:flex-row gap-6 p-4 animate-fade-in">
+    <div class="flex flex-col md:flex-row gap-6 p-4">
       <div class="flex-shrink-0 relative">
         <img src="${m.Poster !== "N/A" ? m.Poster : "https://via.placeholder.com/300x400"}" 
              alt="${m.Title}" class="w-64 h-96 object-cover rounded-2xl shadow-lg border-4 border-purple-600/50 transition-transform duration-300 hover:scale-105">
-        <div class="absolute inset-0 bg-gradient-to-t from-gray-900/50 to-transparent rounded-2xl"></div>
       </div>
       <div class="flex-1 space-y-4">
         <h3 class="text-3xl font-extrabold text-yellow-300">${m.Title} <span class="text-gray-300 text-xl">(${m.Year})</span></h3>
@@ -117,8 +116,6 @@ function attachDetailButtons() {
       success: m => {
         $(".modal-body").html(showMovieDetail(m));
         $("#movieDetailModal").removeClass("hidden").addClass("flex");
-
-        // ✅ Panggil loadComments dari comments.js
         loadComments(imdbID);
       }
     });
