@@ -3,7 +3,7 @@ export function renderHomePage(user) {
   $("#app").html(`
     <!-- Navbar -->
     <header class="px-6 py-3 flex items-center justify-between 
-          bg-gradient-to-r from-purple-900/90 to-indigo-900/90 
+          bg-gradient-to-r from-transparent to-indigo-950/90
           backdrop-blur-md shadow-lg sticky top-0 z-50">
       <h1 class="text-2xl font-extrabold text-white cursor-pointer tracking-wide" id="logoBtn">
         Cine<span class="text-yellow-400">view</span>🎬
@@ -67,7 +67,7 @@ export function renderHomePage(user) {
             and reviews — all in one place.
           </p>
         </div>
-        <img src="https://cdn-icons-png.flaticon.com/512/744/744502.png" 
+        <img src="../assets/img/icon-movie.png" 
             alt="About Cineview" class="w-80 mx-auto animate-float drop-shadow-lg">
       </div>
     </section>
