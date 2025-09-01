@@ -20,11 +20,11 @@ export function renderSearchPage(user) {
         <!-- Navigation -->
         <nav class="flex flex-col space-y-6 px-6 mt-8 text-lg font-medium flex-grow">
           <a href="#home" class="hover:text-yellow-400">Home</a>
+          <a href="#home" class="hover:text-yellow-400">About</a>
+          <a href="#home" class="hover:text-yellow-400">Features</a>
+          <a href="#home" class="hover:text-yellow-400">Testimony</a>
+          <a href="#home" class="hover:text-yellow-400">FAQ</a>
           <a href="#search" class="hover:text-yellow-400">Search</a>
-          <a href="#about" class="hover:text-yellow-400">About</a>
-          <a href="#features" class="hover:text-yellow-400">Features</a>
-          <a href="#faq" class="hover:text-yellow-400">FAQ</a>
-          <a href="#testimony" class="hover:text-yellow-400">Testimony</a>
         </nav>
 
         <!-- Logout Button -->
@@ -160,6 +160,14 @@ export function renderSearchPage(user) {
       </div>
     </div>
   `);
+
+  // Override desktop navbar links to point to #home
+  $("nav a").each(function() {
+    const text = $(this).text();
+    if (["Home", "About", "Features", "Testimony", "FAQ"].includes(text)) {
+      $(this).attr("href", "#home");
+    }
+  });
 
   // Add CSS for animations and glossy glass effect
   const style = document.createElement("style");
