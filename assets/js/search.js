@@ -17,11 +17,6 @@ export function renderSearchPage(user) {
       <!-- Desktop Menu -->
       <nav class="hidden md:flex gap-6 text-gray-300 font-medium">
         <a href="#home" class="hover:text-yellow-400 transition">Home</a>
-        <a href="#about" class="hover:text-yellow-400 transition">About</a>
-        <a href="#testimony" class="hover:text-yellow-400 transition">Testimony</a>
-        <a href="#features" class="hover:text-yellow-400 transition">Features</a>
-        <a href="#faq" class="hover:text-yellow-400 transition">FAQ</a>
-        <a href="#contact" class="hover:text-yellow-400 transition">Contact</a>
         <a href="#search" class="hover:text-yellow-400 transition">Search</a>
       </nav>
 
@@ -50,22 +45,28 @@ export function renderSearchPage(user) {
 
     <!-- Mobile Sidebar -->
     <div id="mobileMenu"
-      class="fixed top-0 right-0 h-full w-64 bg-gradient-to-b from-purple-900 to-indigo-900 text-white transform translate-x-full transition-transform duration-300 z-50 md:hidden shadow-xl">
+      class="fixed top-0 right-0 h-full w-64 bg-gradient-to-b from-purple-900 to-indigo-900 text-white transform translate-x-full transition-transform duration-300 z-50 md:hidden shadow-xl flex flex-col">
+      
+      <!-- Header -->
       <div class="flex justify-between items-center p-4 border-b border-purple-700">
         <h2 class="text-xl font-bold">Menu</h2>
         <button id="menuClose" class="text-2xl"><i class="fa-solid fa-xmark"></i></button>
       </div>
-      <nav class="flex flex-col space-y-6 px-6 mt-8 text-lg font-medium">
+
+      <!-- Navigation -->
+      <nav class="flex flex-col space-y-6 px-6 mt-8 text-lg font-medium flex-grow">
         <a href="#home" class="hover:text-yellow-400">Home</a>
-        <a href="#about" class="hover:text-yellow-400">About</a>
-        <a href="#testimony" class="hover:text-yellow-400">Testimony</a>
-        <a href="#features" class="hover:text-yellow-400 transition">Features</a>
-        <a href="#faq" class="hover:text-yellow-400 transition">FAQ</a>
-        <a href="#contact" class="hover:text-yellow-400">Contact</a>
         <a href="#search" class="hover:text-yellow-400">Search</a>
       </nav>
-    </div>
 
+      <!-- Logout Button -->
+      <div class="p-6 border-t border-purple-700">
+        <button id="logoutBtn"
+          class="w-full py-2 px-4 rounded-lg bg-red-600 hover:bg-red-700 transition">
+          <i class="fa-solid fa-right-from-bracket mr-2"></i> Logout
+        </button>
+      </div>
+    </div>
 
       <!-- Search Section -->
       <section id="searchSection" class="flex-1 flex flex-col items-center justify-center text-center py-20 transition-all duration-500 z-10">
@@ -291,6 +292,12 @@ export function renderSearchPage(user) {
       if (e.key === "Escape") $("#profileMenu").addClass("hidden");
     });
 
+    // Logout
+  $("#logoutBtn").on("click", () => {
+    localStorage.removeItem("cineviewUser");
+    window.location.hash = "#login";
+  });
+
   // ===== Utility: Debounce =====
   function debounce(fn, delay) {
     let timer;
@@ -347,4 +354,3 @@ export function renderSearchPage(user) {
     $("#movieDetailModal").addClass("hidden").removeClass("flex");
   });
 }
-
