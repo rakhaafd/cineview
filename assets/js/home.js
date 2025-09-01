@@ -116,52 +116,58 @@ export async function renderHomePage(user) {
         </div>
       </section>
 
-      <!-- FAQ Section -->
-      <section id="faq" class="py-20 px-6 bg-gradient-to-r from-indigo-950 via-purple-900 to-violet-950 z-10">
-        <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-12 items-start text-white">
-          <div class="md:col-span-2">
-            <h1 class="text-4xl font-bold mb-3">Any Questions?</h1>
-            <h2 class="text-4xl font-bold mb-6">We got you.</h2>
-            <p class="mb-8">Find answers to frequently asked questions about using Cineview.</p>
-            <div class="space-y-4">
-              <div class="border rounded-xl overflow-hidden">
-                <button class="w-full flex justify-between items-center px-6 py-4 text-left font-semibold text-gray-800 bg-white hover:bg-gray-100 faq-toggle">
-                  What is Cineview?
-                  <i class="fa-solid fa-chevron-down transition-transform"></i>
-                </button>
-                <div class="faq-content hidden px-6 py-4 bg-gray-50 text-gray-700">
-                  Cineview is a movie database platform that provides detailed information, ratings, and reviews for various types of movies.
-                </div>
-              </div>
-              <div class="border rounded-xl overflow-hidden">
-                <button class="w-full flex justify-between items-center px-6 py-4 text-left font-semibold text-gray-800 bg-white hover:bg-gray-100 faq-toggle">
-                  Who can use Cineview?
-                  <i class="fa-solid fa-chevron-down transition-transform"></i>
-                </button>
-                <div class="faq-content hidden px-6 py-4 bg-gray-50 text-gray-700">
-                  Everyone who wants to search for, explore, or review movies.
-                </div>
-              </div>
-              <div class="border rounded-xl overflow-hidden">
-                <button class="w-full flex justify-between items-center px-6 py-4 text-left font-semibold text-gray-800 bg-white hover:bg-gray-100 faq-toggle">
-                  Is my personal data secure?
-                  <i class="fa-solid fa-chevron-down transition-transform"></i>
-                </button>
-                <div class="faq-content hidden px-6 py-4 bg-gray-50 text-gray-700">
-                  Yes, we protect your data with encryption and multi-layered protection systems.
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="bg-red-50 p-8 rounded-2xl shadow-md">
-            <h3 class="text-2xl font-bold text-gray-900 mb-4">Have another question?</h3>
-            <p class="text-gray-700 mb-6">We are ready to assist you. Please feel free to contact our team anytime.</p>
-            <a href="#contact" class="block w-full text-center bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-xl transition">
-              Contact Us
-            </a>
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 px-6 bg-gradient-to-r from-indigo-950 via-purple-900 to-violet-950 z-10">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-12 items-start text-white">
+    <div class="md:col-span-2">
+      <h1 class="text-4xl font-bold mb-3">Any Questions?</h1>
+      <h2 class="text-4xl font-bold mb-6">We got you.</h2>
+      <p class="mb-8">Find answers to frequently asked questions about using Cineview.</p>
+      <div class="space-y-4">
+        
+        <div class="border rounded-xl overflow-hidden">
+          <button class="w-full flex justify-between items-center px-6 py-4 text-left font-semibold text-gray-800 bg-white hover:bg-gray-100 faq-toggle">
+            What is Cineview?
+            <i class="fa-solid fa-chevron-down transition-transform"></i>
+          </button>
+          <div class="faq-content px-6 py-4 bg-gray-50 text-gray-700" style="display:none;">
+            Cineview is a movie database platform that provides detailed information, ratings, and reviews for various types of movies.
           </div>
         </div>
-      </section>
+
+        <div class="border rounded-xl overflow-hidden">
+          <button class="w-full flex justify-between items-center px-6 py-4 text-left font-semibold text-gray-800 bg-white hover:bg-gray-100 faq-toggle">
+            Who can use Cineview?
+            <i class="fa-solid fa-chevron-down transition-transform"></i>
+          </button>
+          <div class="faq-content px-6 py-4 bg-gray-50 text-gray-700" style="display:none;">
+            Everyone who wants to search for, explore, or review movies.
+          </div>
+        </div>
+
+        <div class="border rounded-xl overflow-hidden">
+          <button class="w-full flex justify-between items-center px-6 py-4 text-left font-semibold text-gray-800 bg-white hover:bg-gray-100 faq-toggle">
+            Is my personal data secure?
+            <i class="fa-solid fa-chevron-down transition-transform"></i>
+          </button>
+          <div class="faq-content px-6 py-4 bg-gray-50 text-gray-700" style="display:none;">
+            Yes, we protect your data with encryption and multi-layered protection systems.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="bg-red-50 p-8 rounded-2xl shadow-md">
+      <h3 class="text-2xl font-bold text-gray-900 mb-4">Have another question?</h3>
+      <p class="text-gray-700 mb-6">We are ready to assist you. Please feel free to contact our team anytime.</p>
+      <a href="#contact" class="block w-full text-center bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-xl transition">
+        Contact Us
+      </a>
+    </div>
+  </div>
+</section>
+
 
       <!-- Contact Section -->
       <section id="contact" class="py-20 px-6 bg-gradient-to-r from-purple-900 via-violet-900 to-indigo-950 text-white z-10">
@@ -396,9 +402,22 @@ export async function renderHomePage(user) {
   });
 
   // FAQ Toggle
-  $(".faq-toggle").on("click", function () {
-    console.log("❓ FAQ toggle clicked");
-    $(this).find(".fa-chevron-down").toggleClass("rotate-180");
-    $(this).next(".faq-content").slideToggle(300);
-  });
+  $(".faq-toggle")
+    .off("click") // buang listener lama biar gak numpuk
+    .on("click", function () {
+      console.log("❓ FAQ toggle clicked");
+
+      let $icon = $(this).find(".fa-chevron-down");
+      let $content = $(this).next(".faq-content");
+
+      if ($content.is(":visible")) {
+        // Tutup
+        $content.stop(true, true).slideUp(300);
+        $icon.removeClass("rotate-180");
+      } else {
+        // Buka
+        $content.stop(true, true).slideDown(300);
+        $icon.addClass("rotate-180");
+      }
+    });
 }
