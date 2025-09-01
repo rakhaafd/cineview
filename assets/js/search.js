@@ -3,29 +3,29 @@ import { initializeChatbot } from "./chatbot.js";
 
 export function renderSearchPage(user) {
   $("#app").html(`
-    <div class="min-h-screen bg-[radial-gradient(circle_at_30%_50%,_#0B0214_0%,_#2A0549_50%,_#3D0A6D_150%)] text-white flex flex-col animated-gradient">
+    <div class="min-h-screen bg-[radial-gradient(circle_at_30%_50%,_#0B0214_0%,_#2A0549_50%,_#4C1D95_150%)] text-white flex flex-col animated-gradient">
       <header
-      class="px-6 py-3 flex items-center justify-between 
-            bg-gradient-to-r from-transparent to-indigo-950/90 
-            backdrop-blur-md shadow-lg sticky top-0 z-50">
+        class="px-6 py-3 flex items-center justify-between 
+              bg-gradient-to-r from-transparent to-indigo-950/90 
+              backdrop-blur-md shadow-lg sticky top-0 z-50">
 
-      <!-- Logo -->
-      <h1 class="text-2xl font-extrabold text-white cursor-pointer tracking-wide" id="logoBtn">
-        Cine<span class="text-yellow-400">view</span>🎬
-      </h1>
+        <!-- Logo -->
+        <h1 class="text-2xl font-extrabold text-white cursor-pointer tracking-wide" id="logoBtn">
+          Cine<span class="text-yellow-400">view</span>🎬
+        </h1>
 
-      <!-- Desktop Menu -->
-      <nav class="hidden md:flex gap-6 text-gray-300 font-medium">
-        <a href="#home" class="hover:text-yellow-400 transition">Home</a>
-        <a href="#search" class="hover:text-yellow-400 transition">Search</a>
-      </nav>
+        <!-- Desktop Menu -->
+        <nav class="hidden md:flex gap-6 text-gray-300 font-medium">
+          <a href="#home" class="hover:text-yellow-400 transition">Home</a>
+          <a href="#search" class="hover:text-yellow-400 transition">Search</a>
+        </nav>
 
-      <!-- Mobile Menu Button -->
-      <button class="md:hidden text-white text-2xl" id="menuToggle">
-        <i class="fa-solid fa-bars"></i>
-      </button>
+        <!-- Mobile Menu Button -->
+        <button class="md:hidden text-white text-2xl" id="menuToggle">
+          <i class="fa-solid fa-bars"></i>
+        </button>
 
-      <!-- Profile Dropdown -->
+        <!-- Profile Dropdown -->
         <div class="relative hidden md:block">
           <button id="profileBtn" class="flex items-center gap-2">
             <img src="${
@@ -35,38 +35,38 @@ export function renderSearchPage(user) {
           <div id="profileMenu" 
               class="hidden absolute right-0 mt-2 w-52 bg-gray-800 text-white rounded-xl shadow-lg overflow-hidden">
             <div class="px-4 py-3 border-b border-gray-700">
-             <p class="font-semibold">${user.email}</p>
+              <p class="font-semibold">${user.email}</p>
             </div>
             <button id="viewProfile" class="block w-full text-left px-4 py-2 hover:bg-purple-700">Profile</button>
             <button id="logoutBtn" class="block w-full text-left px-4 py-2 hover:bg-red-600">Logout</button>
           </div>
         </div>
-    </header>
+      </header>
 
-    <!-- Mobile Sidebar -->
-    <div id="mobileMenu"
-      class="fixed top-0 right-0 h-full w-64 bg-gradient-to-b from-purple-900 to-indigo-900 text-white transform translate-x-full transition-transform duration-300 z-50 md:hidden shadow-xl flex flex-col">
-      
-      <!-- Header -->
-      <div class="flex justify-between items-center p-4 border-b border-purple-700">
-        <h2 class="text-xl font-bold">Menu</h2>
-        <button id="menuClose" class="text-2xl"><i class="fa-solid fa-xmark"></i></button>
+      <!-- Mobile Sidebar -->
+      <div id="mobileMenu"
+        class="fixed top-0 right-0 h-full w-64 bg-gradient-to-b from-purple-900 to-indigo-900 text-white transform translate-x-full transition-transform duration-300 z-50 md:hidden shadow-xl flex flex-col">
+        
+        <!-- Header -->
+        <div class="flex justify-between items-center p-4 border-b border-purple-700">
+          <h2 class="text-xl font-bold">Menu</h2>
+          <button id="menuClose" class="text-2xl"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="flex flex-col space-y-6 px-6 mt-8 text-lg font-medium flex-grow">
+          <a href="#home" class="hover:text-yellow-400">Home</a>
+          <a href="#search" class="hover:text-yellow-400">Search</a>
+        </nav>
+
+        <!-- Logout Button -->
+        <div class="p-6 border-t border-purple-700">
+          <button id="logoutBtn"
+            class="w-full py-2 px-4 rounded-lg bg-red-600 hover:bg-red-700 transition">
+            <i class="fa-solid fa-right-from-bracket mr-2"></i> Logout
+          </button>
+        </div>
       </div>
-
-      <!-- Navigation -->
-      <nav class="flex flex-col space-y-6 px-6 mt-8 text-lg font-medium flex-grow">
-        <a href="#home" class="hover:text-yellow-400">Home</a>
-        <a href="#search" class="hover:text-yellow-400">Search</a>
-      </nav>
-
-      <!-- Logout Button -->
-      <div class="p-6 border-t border-purple-700">
-        <button id="logoutBtn"
-          class="w-full py-2 px-4 rounded-lg bg-red-600 hover:bg-red-700 transition">
-          <i class="fa-solid fa-right-from-bracket mr-2"></i> Logout
-        </button>
-      </div>
-    </div>
 
       <!-- Search Section -->
       <section id="searchSection" class="flex-1 flex flex-col items-center justify-center text-center py-20 transition-all duration-500 z-10">
@@ -165,12 +165,12 @@ export function renderSearchPage(user) {
       </button>
 
       <!-- Chatbot Popup -->
-      <div id="chatbotPopup" class="hidden fixed bottom-20 right-6 w-96 max-w-[90vw] bg-gray-800 rounded-xl shadow-2xl z-50 flex flex-col">
+      <div id="chatbotPopup" class="hidden fixed bottom-20 right-6 w-96 max-w-[90vw] h-[500px] bg-gray-800 rounded-xl shadow-2xl z-50 flex flex-col">
         <div class="bg-gradient-to-r from-[#4C1D95] to-[#DB2777] px-4 py-3 flex justify-between items-center rounded-t-xl">
           <h3 class="text-white font-bold text-lg">CineBot 🤖</h3>
           <button id="chatbotClose" class="text-white hover:text-yellow-300 text-xl font-semibold transition-colors">✖</button>
         </div>
-        <div id="chatbotMessages" class="flex-1 p-4 min-h-[300px] max-h-[500px] overflow-y-auto bg-gray-900 text-gray-200 flex flex-col gap-3">
+        <div id="chatbotMessages" class="flex-1 p-4 overflow-y-auto bg-gray-900 text-gray-200 flex flex-col gap-3">
           <!-- Messages will be appended here -->
         </div>
         <div class="p-4 border-t border-gray-700">
@@ -193,7 +193,7 @@ export function renderSearchPage(user) {
     </div>
   `);
 
-  // tambahkan style animasi (seperti sebelumnya)
+  // Add CSS for animations and glossy glass effect
   const style = document.createElement("style");
   style.innerHTML = `
     @keyframes gradient-flow {
@@ -253,7 +253,7 @@ export function renderSearchPage(user) {
     $("#mobileMenu").removeClass("translate-x-0").addClass("translate-x-full");
   });
 
-  // (Opsional) close setelah klik link
+  // (Optional) close after clicking link
   $("#mobileMenu a").on("click", function () {
     $("#mobileMenu").removeClass("translate-x-0").addClass("translate-x-full");
   });
@@ -272,11 +272,11 @@ export function renderSearchPage(user) {
   $("#profileBtn")
     .off("click")
     .on("click", function (e) {
-      e.stopPropagation(); // cegah bubbling, biar nggak ketutup lagi
+      e.stopPropagation(); // Prevent bubbling to avoid closing immediately
       $("#profileMenu").toggleClass("hidden");
     });
 
-  // Tutup saat klik di luar menu
+  // Close profile menu when clicking outside
   $(document)
     .off("click.profile")
     .on("click.profile", function (e) {
@@ -285,14 +285,14 @@ export function renderSearchPage(user) {
       }
     });
 
-  // Tutup saat tekan Escape
+  // Close profile menu on Escape key
   $(document)
     .off("keydown.profile")
     .on("keydown.profile", function (e) {
       if (e.key === "Escape") $("#profileMenu").addClass("hidden");
     });
 
-    // Logout
+  // Logout
   $("#logoutBtn").on("click", () => {
     localStorage.removeItem("cineviewUser");
     window.location.hash = "#login";
@@ -315,7 +315,7 @@ export function renderSearchPage(user) {
     const country = $("#countryFilter").val();
 
     if (!keyword.trim()) {
-      // reset tampilan kalau kosong
+      // Reset display if empty
       $("#resultsSection").addClass("hidden");
       $("#searchSection")
         .removeClass("py-6 border-b border-gray-700")
@@ -324,7 +324,7 @@ export function renderSearchPage(user) {
       return;
     }
 
-    // kalau ada keyword
+    // If keyword exists
     $("#searchSection")
       .removeClass("flex-1 justify-center")
       .addClass("py-6 border-b border-gray-700");
@@ -346,10 +346,10 @@ export function renderSearchPage(user) {
     }
   });
 
-  // ✅ live search ketika ketik
+  // Live search on input
   $("#searchInput").on("input", debouncedSearch);
 
-  // close modal
+  // Close modal
   $(document).on("click", ".close-modal", () => {
     $("#movieDetailModal").addClass("hidden").removeClass("flex");
   });
