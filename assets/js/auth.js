@@ -50,7 +50,7 @@ function saveUser(user) {
 }
 
 // 🔹 Ambil user dari localStorage
-function getUser() {
+export function getUser() {
   const stored = localStorage.getItem("cineviewUser");
   if (!stored) return null;
   try {

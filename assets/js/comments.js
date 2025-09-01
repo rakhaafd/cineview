@@ -1,7 +1,8 @@
-// comments.js
+import { getUser } from "./auth.js"
+
 const db = firebase.firestore();
 
-function loadComments(imdbID) {
+export function loadComments(imdbID) {
   const commentsRef = db.collection("comments")
     .doc(imdbID)
     .collection("messages")
@@ -22,9 +23,8 @@ function loadComments(imdbID) {
             <span class="font-bold text-purple-300">${c.userName}</span>
           </div>
           <p class="ml-10 text-gray-200">${c.text}</p>
-
           ${
-            user && user.email === c.userEmail
+            user && user.name === c.userName
               ? `
               <div class="flex gap-2 mt-2 ml-10">
                 <button class="delete-comment px-2 py-1 bg-red-600 text-white rounded text-sm" data-id="${id}" data-imdbid="${imdbID}">Delete</button>
@@ -48,7 +48,6 @@ function loadComments(imdbID) {
 
     db.collection("comments").doc(imdbID).collection("messages").add({
       userName: user.name,
-      userEmail: user.email,
       userPhoto: user.photo,
       text: text,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),

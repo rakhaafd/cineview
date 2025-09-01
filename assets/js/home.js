@@ -1,6 +1,7 @@
 // home.js (Landing Page dengan Profile + Logout)
 export function renderHomePage(user) {
-  $("#app").html(`    <header
+  $("#app").html(`    
+    <header
       class="px-6 py-3 flex items-center justify-between 
             bg-gradient-to-r from-transparent to-indigo-950/90 
             backdrop-blur-md shadow-lg sticky top-0 z-50">
@@ -15,9 +16,10 @@ export function renderHomePage(user) {
         <a href="#home" class="hover:text-yellow-400 transition">Home</a>
         <a href="#about" class="hover:text-yellow-400 transition">About</a>
         <a href="#testimony" class="hover:text-yellow-400 transition">Testimony</a>
+        <a href="#features" class="hover:text-yellow-400 transition">Features</a>
+        <a href="#faq" class="hover:text-yellow-400 transition">FAQ</a>
         <a href="#contact" class="hover:text-yellow-400 transition">Contact</a>
         <a href="#search" class="hover:text-yellow-400 transition">Search</a>
-        <a href="#login" class="hover:text-yellow-400 transition">Login</a>
       </nav>
 
       <!-- Mobile Menu Button -->
@@ -41,26 +43,21 @@ export function renderHomePage(user) {
         </div>
     </header>
 
-   <!-- Mobile Sidebar -->
+    <!-- Mobile Sidebar -->
     <div id="mobileMenu"
-        class="fixed top-0 right-0 h-full w-64 bg-gradient-to-b from-purple-900 to-indigo-900 text-white transform translate-x-full transition-transform duration-300 z-50 md:hidden shadow-xl">
-  
-       <!-- Header -->
-       <div class="flex justify-between items-center p-4 border-b border-purple-700">
-            <h2 class="text-xl font-bold">Menu</h2>
-            <button id="menuClose" class="text-2xl">
-              <i class="fa-solid fa-xmark"></i>
-            </button>
-       </div>
-
-      <!-- Links -->
+      class="fixed top-0 right-0 h-full w-64 bg-gradient-to-b from-purple-900 to-indigo-900 text-white transform translate-x-full transition-transform duration-300 z-50 md:hidden shadow-xl">
+      <div class="flex justify-between items-center p-4 border-b border-purple-700">
+        <h2 class="text-xl font-bold">Menu</h2>
+        <button id="menuClose" class="text-2xl"><i class="fa-solid fa-xmark"></i></button>
+      </div>
       <nav class="flex flex-col space-y-6 px-6 mt-8 text-lg font-medium">
         <a href="#home" class="hover:text-yellow-400">Home</a>
         <a href="#about" class="hover:text-yellow-400">About</a>
         <a href="#testimony" class="hover:text-yellow-400">Testimony</a>
+        <a href="#features" class="hover:text-yellow-400 transition">Features</a>
+        <a href="#faq" class="hover:text-yellow-400 transition">FAQ</a>
         <a href="#contact" class="hover:text-yellow-400">Contact</a>
         <a href="#search" class="hover:text-yellow-400">Search</a>
-        <a href="#login" class="hover:text-yellow-400">Login</a>
       </nav>
     </div>
 
@@ -81,7 +78,7 @@ export function renderHomePage(user) {
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20 px-6 bg-gradient-to-r from-[#8900f2]/80 via-[#a100f2]/80 to-[#b100e8]/80 text-white">
+    <section id="about" class="py-20 px-6 bg-gradient-to-r from-purple-900 via-purple-800 to-indigo-900 text-white">
       <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
         <div>
           <h2 class="text-4xl font-bold mb-6">About Us</h2>
@@ -132,8 +129,95 @@ export function renderHomePage(user) {
       </div>
     </section>
 
+    <!-- Features Section -->
+    <section id="features" class="py-20 px-6 bg-gradient-to-r from-indigo-900 via-purple-900 to-indigo-950 text-white">
+      <div class="max-w-6xl mx-auto text-center mb-12">
+        <h2 class="text-4xl font-bold">Why Choose Cineview?</h2>
+        <p class="text-lg text-gray-300 mt-4">Discover what makes Cineview your best choice for exploring movies.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <!-- Card 1 -->
+        <div class="bg-white/10 rounded-2xl p-8 shadow-lg hover:scale-105 transition transform text-center">
+          <i class="fa-solid fa-film text-yellow-400 text-4xl mb-4"></i>
+          <h3 class="text-2xl font-bold mb-3">Extensive Database</h3>
+          <p class="text-gray-300">From blockbusters to hidden gems, explore thousands of movies in one place.</p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="bg-white/10 rounded-2xl p-8 shadow-lg hover:scale-105 transition transform text-center">
+          <i class="fa-solid fa-star text-yellow-400 text-4xl mb-4"></i>
+          <h3 class="text-2xl font-bold mb-3">Trusted Ratings</h3>
+          <p class="text-gray-300">Check reliable ratings and reviews before deciding your next watch.</p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="bg-white/10 rounded-2xl p-8 shadow-lg hover:scale-105 transition transform text-center">
+          <i class="fa-solid fa-magnifying-glass text-yellow-400 text-4xl mb-4"></i>
+          <h3 class="text-2xl font-bold mb-3">Fast Search</h3>
+          <p class="text-gray-300">Find movies quickly with our smart and lightning-fast search engine.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 px-6 bg-gradient-to-r from-purple-950 to-indigo-900">
+      <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-12 items-start text-white">
+        
+        <!-- Left (Accordion FAQ) -->
+        <div class="md:col-span-2">
+          <h2 class="text-4xl font-bold mb-6">Tanya Jawab</h2>
+          <p class=" mb-8">Temukan jawaban dari pertanyaan umum seputar penggunaan Cineview.</p>
+
+          <div class="space-y-4">
+            <!-- FAQ Item -->
+            <div class="border rounded-xl overflow-hidden">
+              <button class="w-full flex justify-between items-center px-6 py-4 text-left font-semibold text-gray-800 bg-white hover:bg-gray-100 faq-toggle">
+                Apa itu Cineview?
+                <i class="fa-solid fa-chevron-down transition-transform"></i>
+              </button>
+              <div class="faq-content hidden px-6 py-4 bg-gray-50 text-gray-700">
+                Cineview adalah platform database film yang menyediakan informasi detail, rating, dan ulasan untuk berbagai jenis film.
+              </div>
+            </div>
+
+            <div class="border rounded-xl overflow-hidden">
+              <button class="w-full flex justify-between items-center px-6 py-4 text-left font-semibold text-gray-800 bg-white hover:bg-gray-100 faq-toggle">
+                Siapa saja yang bisa menggunakan Cineview?
+                <i class="fa-solid fa-chevron-down transition-transform"></i>
+              </button>
+              <div class="faq-content hidden px-6 py-4 bg-gray-50 text-gray-700">
+                Semua orang yang ingin mencari, mengeksplorasi, atau memberikan ulasan film.
+              </div>
+            </div>
+
+            <div class="border rounded-xl overflow-hidden">
+              <button class="w-full flex justify-between items-center px-6 py-4 text-left font-semibold text-gray-800 bg-white hover:bg-gray-100 faq-toggle">
+                Apakah data pribadi saya aman?
+                <i class="fa-solid fa-chevron-down transition-transform"></i>
+              </button>
+              <div class="faq-content hidden px-6 py-4 bg-gray-50 text-gray-700">
+                Ya, kami menjaga keamanan data Anda dengan sistem enkripsi dan proteksi berlapis.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right (Hubungi Kami Box) -->
+        <div class="bg-red-50 p-8 rounded-2xl shadow-md">
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Punya Pertanyaan Lain?</h3>
+          <p class="text-gray-700 mb-6">Kami siap membantu Anda. Jangan ragu untuk menghubungi tim kami kapan saja.</p>
+          <a href="#contact" class="block w-full text-center bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-xl transition">
+            Hubungi Kami
+          </a>
+        </div>
+      </div>
+    </section>
+
+
+
     <!-- Contact Section -->
-    <section id="contact" class="py-20 px-6 bg-gradient-to-r from-[#8900f2]/80 via-[#a100f2]/80 to-[#b100e8]/80 text-white">
+    <section id="contact" class="py-20 px-6 bg-gradient-to-r from-purple-900 via-purple-800 to-indigo-900 text-white">
       <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
         
         <!-- Contact Info -->
@@ -180,67 +264,76 @@ export function renderHomePage(user) {
   `);
 
   // Navbar Mobile
-  $(document).ready(function () {
-    // Sidebar toggle
-$("#menuToggle").on("click", () => {
-  $("#mobileMenu").removeClass("translate-x-full").addClass("translate-x-0");
-});
+  // Open sidebar
+  $("#menuToggle").on("click", function () {
+    $("#mobileMenu").removeClass("translate-x-full").addClass("translate-x-0");
+  });
 
-$("#menuClose, #mobileMenu a").on("click", () => {
-  $("#mobileMenu").removeClass("translate-x-0").addClass("translate-x-full");
-});
+  // Close sidebar
+  $("#menuClose").on("click", function () {
+    $("#mobileMenu").removeClass("translate-x-0").addClass("translate-x-full");
+  });
 
-    // (Opsional) close setelah klik link
-    $("#mobileMenu a").on("click", function () {
-      $("#mobileMenu")
-        .removeClass("translate-x-0")
-        .addClass("translate-x-full");
-    });
+  // (Opsional) close setelah klik link
+  $("#mobileMenu a").on("click", function () {
+    $("#mobileMenu").removeClass("translate-x-0").addClass("translate-x-full");
+  });
 
-    // Profile dropdown toggle
-    $("#profileBtn").on("click", function () {
+  // === Profile dropdown (FIX) ===
+  $("#profileBtn")
+    .off("click")
+    .on("click", function (e) {
+      e.stopPropagation(); // cegah bubbling, biar nggak ketutup lagi
       $("#profileMenu").toggleClass("hidden");
     });
-  });
 
-  // Simple Carousel Script
-  $(document).ready(function () {
-    let currentSlide = 0;
-    const totalSlides = $("#carousel > div").length;
-
-    function moveCarousel(index) {
-      currentSlide = index;
-      $("#carousel").css("transform", `translateX(-${index * 100}%)`);
-      updateDots();
-    }
-
-    function updateDots() {
-      $(".dot").removeClass("bg-yellow-400").addClass("bg-gray-400");
-      $(`.dot[data-index='${currentSlide}']`)
-        .removeClass("bg-gray-400")
-        .addClass("bg-yellow-400");
-    }
-
-    // Dot click
-    $(".dot").on("click", function () {
-      const index = $(this).data("index");
-      moveCarousel(index);
+  // Tutup saat klik di luar menu
+  $(document)
+    .off("click.profile")
+    .on("click.profile", function (e) {
+      if (!$(e.target).closest("#profileBtn, #profileMenu").length) {
+        $("#profileMenu").addClass("hidden");
+      }
     });
 
-    // Auto slide every 5s
-    setInterval(function () {
-      currentSlide = (currentSlide + 1) % totalSlides;
-      moveCarousel(currentSlide);
-    }, 5000);
+  // Tutup saat tekan Escape
+  $(document)
+    .off("keydown.profile")
+    .on("keydown.profile", function (e) {
+      if (e.key === "Escape") $("#profileMenu").addClass("hidden");
+    });
 
-    // Initial dot update
+  // Simple Carousel Script
+  let currentSlide = 0;
+  const totalSlides = $("#carousel > div").length;
+
+  function moveCarousel(index) {
+    currentSlide = index;
+    $("#carousel").css("transform", `translateX(-${index * 100}%)`);
     updateDots();
+  }
+
+  function updateDots() {
+    $(".dot").removeClass("bg-yellow-400").addClass("bg-gray-400");
+    $(`.dot[data-index='${currentSlide}']`)
+      .removeClass("bg-gray-400")
+      .addClass("bg-yellow-400");
+  }
+
+  // Dot click
+  $(".dot").on("click", function () {
+    const index = $(this).data("index");
+    moveCarousel(index);
   });
 
-  // Toggle dropdown profile
-  $("#profileBtn").on("click", () => {
-    $("#profileMenu").toggleClass("hidden");
-  });
+  // Auto slide every 5s
+  setInterval(function () {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    moveCarousel(currentSlide);
+  }, 5000);
+
+  // Initial dot update
+  updateDots();
 
   // View Profile
   $("#viewProfile").on("click", () => {
