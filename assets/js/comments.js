@@ -1,4 +1,4 @@
-import { getUser } from "./auth.js"
+import { getUser } from "./auth.js";
 
 const db = firebase.firestore();
 
@@ -16,10 +16,14 @@ export function loadComments(imdbID) {
       const c = doc.data();
       const id = doc.id;
 
+      const photo = c.userPhoto && c.userPhoto !== "null" && c.userPhoto !== "undefined"
+        ? c.userPhoto
+        : `https://ui-avatars.com/api/?name=${encodeURIComponent(c.userName)}&background=4C1D95&color=fff&size=128&rounded=true`;
+
       html += `
         <div class="bg-gray-800 p-3 rounded-xl relative group mb-3" data-id="${id}">
           <div class="flex items-center gap-2">
-            <img src="${c.userPhoto}" class="w-8 h-8 rounded-full" />
+            <img src="${photo}" class="w-8 h-8 rounded-full" />
             <span class="font-bold text-purple-300">${c.userName}</span>
           </div>
           <p class="ml-10 text-gray-200">${c.text}</p>
@@ -39,16 +43,17 @@ export function loadComments(imdbID) {
     $("#commentsList").html(html || "<p class='text-gray-400'>No comments yet.</p>");
   });
 
-  // === Tambah Komentar ===
   $(document).off("submit", "#commentForm").on("submit", "#commentForm", function (e) {
     e.preventDefault();
     const user = getUser();
     const text = $("#commentInput").val().trim();
     if (!text || !user) return;
 
+    const fallbackAvatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}&background=4C1D95&color=fff&size=128&rounded=true`;
+
     db.collection("comments").doc(imdbID).collection("messages").add({
       userName: user.name,
-      userPhoto: user.photo,
+      userPhoto: user.photo || fallbackAvatar,
       text: text,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     }).then(() => {
@@ -58,7 +63,6 @@ export function loadComments(imdbID) {
     $("#commentInput").val("");
   });
 
-  // === HAPUS KOMENTAR (SweetAlert confirm) ===
   $(document).off("click", ".delete-comment").on("click", ".delete-comment", function () {
     const id = $(this).data("id");
     const imdb = $(this).data("imdbid");

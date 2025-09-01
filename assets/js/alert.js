@@ -1,5 +1,5 @@
 // alert.js
-function showSuccess(message) {
+export function showSuccess(message) {
   Swal.fire({
     toast: true,
     position: 'top-end',   // kanan atas
@@ -11,7 +11,7 @@ function showSuccess(message) {
   });
 }
 
-function showError(message) {
+export function showError(message) {
   Swal.fire({
     toast: true,
     position: 'top-end',
@@ -23,7 +23,7 @@ function showError(message) {
   });
 }
 
-function showInfo(message) {
+export function showInfo(message) {
   Swal.fire({
     toast: true,
     position: 'top-end',

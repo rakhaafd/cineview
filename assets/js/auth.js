@@ -1,74 +1,90 @@
-// ============ AUTH FUNCTIONS ============
+import { showSuccess, showError } from "./alert.js";
 
-// 🔹 Google Login
 export function handleGoogleLogin() {
   const provider = new firebase.auth.GoogleAuthProvider();
+  provider.addScope('profile email');
+  provider.setCustomParameters({ prompt: 'select_account' });
   firebase.auth().signInWithPopup(provider)
     .then(result => {
       const user = result.user;
-      saveUser(user);
+      saveUser(user, true);
       window.location.hash = "#home";
-
-      // ✅ SweetAlert success
       showSuccess("Welcome back, " + (user.displayName || user.email) + "!");
     })
     .catch(err => {
-      console.error("Google login gagal:", err);
-      showError("Google login gagal, coba lagi!");
+      showError("Google login gagal: " + err.message);
     });
 }
 
-// 🔹 Email Login
 export function handleEmailLogin(email, password) {
   firebase.auth().signInWithEmailAndPassword(email, password)
     .then(result => {
       const user = result.user;
-      saveUser(user);
+      saveUser(user, false);
       window.location.hash = "#home";
-
-      // ✅ SweetAlert success
       showSuccess("Login berhasil! Selamat datang " + (user.displayName || user.email));
     })
     .catch(err => {
-      console.error("Email login gagal:", err);
-      showError(err.message);
+      showError("Login gagal: " + err.message);
     });
 }
 
-// 🔹 Email Register
 export function handleEmailRegister(email, password) {
-  return firebase.auth().createUserWithEmailAndPassword(email, password);
+  return firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then(result => {
+      const user = result.user;
+      saveUser(user, false);
+      window.location.hash = "#home";
+      showSuccess("Registrasi berhasil! Selamat datang " + (user.displayName || user.email));
+    })
+    .catch(err => {
+      showError("Registrasi gagal: " + err.message);
+    });
 }
 
-// 🔹 Simpan user ke localStorage
-function saveUser(user) {
-  localStorage.setItem("cineviewUser", JSON.stringify({
-    name: user.displayName || user.email,  
-    email: user.email,
-    photo: user.photoURL || "https://ui-avatars.com/api/?name=" + encodeURIComponent(user.email)
-  }));
+function saveUser(user, isGoogleLogin) {
+  const emailPrefix = user.email ? user.email.split('@')[0] : 'user';
+  const fallbackAvatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(emailPrefix)}&background=4C1D95&color=fff&size=128&rounded=true`;
+  
+  if (isGoogleLogin && user.photoURL) {
+    localStorage.setItem("cineviewGooglePhoto", user.photoURL);
+  }
+  
+  const photo = isGoogleLogin
+    ? (user.photoURL || localStorage.getItem("cineviewGooglePhoto") || fallbackAvatar)
+    : (user.photoURL || fallbackAvatar);
+  
+  const userData = {
+    name: user.displayName || emailPrefix,
+    email: user.email || 'unknown',
+    photo: photo
+  };
+  localStorage.setItem("cineviewUser", JSON.stringify(userData));
 }
 
-// 🔹 Ambil user dari localStorage
 export function getUser() {
   const stored = localStorage.getItem("cineviewUser");
   if (!stored) return null;
   try {
-    return JSON.parse(stored);
-  } catch (err) {
-    console.error("Error parsing cineviewUser:", err);
+    const user = JSON.parse(stored);
+    if (!user.photo || user.photo === 'undefined' || user.photo === 'null') {
+      const cachedGooglePhoto = localStorage.getItem("cineviewGooglePhoto");
+      user.photo = cachedGooglePhoto || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.email.split('@')[0] || 'user')}&background=4C1D95&color=fff&size=128&rounded=true`;
+      localStorage.setItem("cineviewUser", JSON.stringify(user));
+    }
+    return user;
+  } catch {
+    showError("Error retrieving user data");
     return null;
   }
 }
 
-// 🔹 Logout user
-function handleLogout() {
+export function handleLogout() {
   firebase.auth().signOut().then(() => {
     localStorage.removeItem("cineviewUser");
     showSuccess("Logout berhasil!");
     window.location.hash = "#login";
   }).catch(err => {
-    console.error("Logout gagal:", err);
     showError("Logout gagal: " + err.message);
   });
 }
