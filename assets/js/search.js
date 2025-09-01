@@ -1,9 +1,10 @@
-// assets/js/search.js
+import { searchMovies } from "./movies.js";
 import { initializeChatbot } from "./chatbot.js";
 
 export function renderSearchPage(user) {
   $("#app").html(`
-    <header
+    <div class="min-h-screen bg-[radial-gradient(circle_at_30%_50%,_#0B0214_0%,_#2A0549_50%,_#3D0A6D_150%)] text-white flex flex-col animated-gradient">
+      <header
       class="px-6 py-3 flex items-center justify-between 
             bg-gradient-to-r from-transparent to-indigo-950/90 
             backdrop-blur-md shadow-lg sticky top-0 z-50">
@@ -65,12 +66,13 @@ export function renderSearchPage(user) {
       </nav>
     </div>
 
+
       <!-- Search Section -->
-      <section id="searchSection" class="flex-1 flex flex-col items-center justify-center text-center py-20 transition-all duration-500">
+      <section id="searchSection" class="flex-1 flex flex-col items-center justify-center text-center py-20 transition-all duration-500 z-10">
         <h1 class="text-5xl font-extrabold mb-4">
           Cine<span class="text-yellow-300">view</span> 🎬
         </h1>
-        <p class="text-gray-300 mb-8 text-lg max-w-md animate-fade-in">
+        <p class="text-gray-300 mb-8 text-lg max-w-md">
           Craving a movie night? Discover top-rated films with <span class="font-bold text-yellow-300">Cineview</span> in seconds!
         </p>
 
@@ -91,7 +93,7 @@ export function renderSearchPage(user) {
         </div>
 
         <!-- Filters -->
-        <div class="flex gap-6 mt-8 flex-wrap justify-center animate-slide-up">
+        <div class="flex gap-6 mt-8 flex-wrap justify-center">
           <!-- Genre -->
           <div class="relative group">
             <i class="fa-solid fa-film absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 group-hover:text-yellow-300 transition-colors"></i>
@@ -140,15 +142,15 @@ export function renderSearchPage(user) {
       </section>
 
       <!-- Results -->
-      <section id="resultsSection" class="px-6 py-12 hidden">
-        <h2 class="text-3xl font-bold mb-6 animate-fade-in">Your Movie Picks 🍿</h2>
+      <section id="resultsSection" class="px-6 py-12 hidden z-10">
+        <h2 class="text-3xl font-bold mb-6">Your Movie Picks 🍿</h2>
         <div class="movie-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
       </section>
 
       <!-- Modal -->
       <div id="movieDetailModal" class="modal hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-        <div class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-3xl max-w-5xl w-full text-gray-200 shadow-2xl overflow-hidden animate-zoom-in">
-          <div class="flex justify-between items-center bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-4">
+        <div class="bg-gradient-to-br from-[#1A0033] via-[#2A0549] to-[#3D0A6D] rounded-3xl max-w-5xl w-full text-gray-200 shadow-2xl overflow-hidden">
+          <div class="flex justify-between items-center bg-gradient-to-r from-[#4C1D95] to-[#DB2777] px-6 py-4">
             <h2 class="font-bold text-2xl text-white">🎥 Movie Spotlight</h2>
             <button class="close-modal text-white font-bold hover:text-yellow-300 text-2xl transition-colors">✖</button>
           </div>
@@ -162,12 +164,12 @@ export function renderSearchPage(user) {
       </button>
 
       <!-- Chatbot Popup -->
-      <div id="chatbotPopup" class="hidden fixed bottom-20 right-6 w-80 max-w-[90vw] bg-gray-800 rounded-xl shadow-2xl z-50 animate-zoom-in flex flex-col">
-        <div class="bg-gradient-to-r from-purple-600 to-pink-600 px-4 py-3 flex justify-between items-center rounded-t-xl">
+      <div id="chatbotPopup" class="hidden fixed bottom-20 right-6 w-96 max-w-[90vw] bg-gray-800 rounded-xl shadow-2xl z-50 flex flex-col">
+        <div class="bg-gradient-to-r from-[#4C1D95] to-[#DB2777] px-4 py-3 flex justify-between items-center rounded-t-xl">
           <h3 class="text-white font-bold text-lg">CineBot 🤖</h3>
           <button id="chatbotClose" class="text-white hover:text-yellow-300 text-xl font-semibold transition-colors">✖</button>
         </div>
-        <div id="chatbotMessages" class="flex-1 p-4 min-h-[200px] max-h-[400px] overflow-y-auto bg-gray-900 text-gray-200 flex flex-col gap-3">
+        <div id="chatbotMessages" class="flex-1 p-4 min-h-[300px] max-h-[500px] overflow-y-auto bg-gray-900 text-gray-200 flex flex-col gap-3">
           <!-- Messages will be appended here -->
         </div>
         <div class="p-4 border-t border-gray-700">
@@ -189,6 +191,55 @@ export function renderSearchPage(user) {
       </div>
     </div>
   `);
+
+  // tambahkan style animasi (seperti sebelumnya)
+  const style = document.createElement("style");
+  style.innerHTML = `
+    @keyframes gradient-flow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .animated-gradient {
+      background: radial-gradient(circle at 30% 50%, #0B0214 0%, #2A0549 50%, #4C1D95 150%);
+      background-size: 300% 300%;
+      animation: gradient-flow 8s ease-in-out infinite;
+      position: relative;
+    }
+    .animated-gradient::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: -1;
+    }
+    #chatbotMessages > div {
+      padding: 8px 12px;
+      border-radius: 8px;
+      max-width: 80%;
+      word-wrap: break-word;
+    }
+    #chatbotMessages > div.bg-gray-700 {
+      margin-left: auto;
+      background-color: #4B5563;
+      color: #FFFFFF;
+    }
+    #chatbotMessages > div.bg-gray-800 {
+      margin-right: auto;
+      background-color: #1F2937;
+      color: #E5E7EB;
+    }
+    @supports not (backdrop-filter: blur(10px)) {
+      .animated-gradient::before {
+        background: rgba(255, 255, 255, 0.2);
+      }
+    }
+  `;
+  document.head.appendChild(style);
+
+  initializeChatbot();
 
   // Navbar Mobile
   // Open sidebar
@@ -240,32 +291,47 @@ export function renderSearchPage(user) {
       if (e.key === "Escape") $("#profileMenu").addClass("hidden");
     });
 
-  // tambahkan style animasi (seperti sebelumnya)
-  const style = document.createElement("style");
-  style.innerHTML = `...`;
-  document.head.appendChild(style);
+  // ===== Utility: Debounce =====
+  function debounce(fn, delay) {
+    let timer;
+    return function (...args) {
+      clearTimeout(timer);
+      timer = setTimeout(() => fn.apply(this, args), delay);
+    };
+  }
 
-  // langsung panggil chatbot init
-  initializeChatbot();
-
-  // --- Existing functionality (handleSearch, dll) ---
+  // ===== Handle Search =====
   function handleSearch() {
     const keyword = $("#searchInput").val();
     const genre = $("#genreFilter").val();
     const year = $("#yearFilter").val();
     const country = $("#countryFilter").val();
 
-    if (!keyword) return;
+    if (!keyword.trim()) {
+      // reset tampilan kalau kosong
+      $("#resultsSection").addClass("hidden");
+      $("#searchSection")
+        .removeClass("py-6 border-b border-gray-700")
+        .addClass("flex-1 justify-center");
+      $(".movie-container").html("");
+      return;
+    }
 
+    // kalau ada keyword
     $("#searchSection")
       .removeClass("flex-1 justify-center")
       .addClass("py-6 border-b border-gray-700");
+
     $("#resultsSection").removeClass("hidden");
 
     searchMovies(keyword, genre, year, country);
   }
 
+  const debouncedSearch = debounce(handleSearch, 400);
+
+  // ===== Event Binding =====
   $("#searchBtn").on("click", handleSearch);
+
   $("#searchInput").on("keypress", function (e) {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -273,6 +339,10 @@ export function renderSearchPage(user) {
     }
   });
 
+  // ✅ live search ketika ketik
+  $("#searchInput").on("input", debouncedSearch);
+
+  // close modal
   $(document).on("click", ".close-modal", () => {
     $("#movieDetailModal").addClass("hidden").removeClass("flex");
   });
