@@ -41,13 +41,19 @@ export function renderHomePage(user) {
         </div>
     </header>
 
-    <!-- Mobile Sidebar -->
+   <!-- Mobile Sidebar -->
     <div id="mobileMenu"
-      class="fixed top-0 right-0 h-full w-64 bg-gradient-to-b from-purple-900 to-indigo-900 text-white transform translate-x-full transition-transform duration-300 z-50 md:hidden shadow-xl">
-      <div class="flex justify-between items-center p-4 border-b border-purple-700">
-        <h2 class="text-xl font-bold">Menu</h2>
-        <button id="menuClose" class="text-2xl"><i class="fa-solid fa-xmark"></i></button>
-      </div>
+        class="fixed top-0 right-0 h-full w-64 bg-gradient-to-b from-purple-900 to-indigo-900 text-white transform translate-x-full transition-transform duration-300 z-50 md:hidden shadow-xl">
+  
+       <!-- Header -->
+       <div class="flex justify-between items-center p-4 border-b border-purple-700">
+            <h2 class="text-xl font-bold">Menu</h2>
+            <button id="menuClose" class="text-2xl">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+       </div>
+
+      <!-- Links -->
       <nav class="flex flex-col space-y-6 px-6 mt-8 text-lg font-medium">
         <a href="#home" class="hover:text-yellow-400">Home</a>
         <a href="#about" class="hover:text-yellow-400">About</a>
@@ -75,7 +81,7 @@ export function renderHomePage(user) {
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20 px-6 bg-gradient-to-r from-purple-900 via-purple-800 to-indigo-900 text-white">
+    <section id="about" class="py-20 px-6 bg-gradient-to-r from-[#8900f2]/80 via-[#a100f2]/80 to-[#b100e8]/80 text-white">
       <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
         <div>
           <h2 class="text-4xl font-bold mb-6">About Us</h2>
@@ -127,7 +133,7 @@ export function renderHomePage(user) {
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 px-6 bg-gradient-to-r from-purple-900 via-purple-800 to-indigo-900 text-white">
+    <section id="contact" class="py-20 px-6 bg-gradient-to-r from-[#8900f2]/80 via-[#a100f2]/80 to-[#b100e8]/80 text-white">
       <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
         
         <!-- Contact Info -->
@@ -175,19 +181,14 @@ export function renderHomePage(user) {
 
   // Navbar Mobile
   $(document).ready(function () {
-    // Open sidebar
-    $("#menuToggle").on("click", function () {
-      $("#mobileMenu")
-        .removeClass("translate-x-full")
-        .addClass("translate-x-0");
-    });
+    // Sidebar toggle
+$("#menuToggle").on("click", () => {
+  $("#mobileMenu").removeClass("translate-x-full").addClass("translate-x-0");
+});
 
-    // Close sidebar
-    $("#menuClose").on("click", function () {
-      $("#mobileMenu")
-        .removeClass("translate-x-0")
-        .addClass("translate-x-full");
-    });
+$("#menuClose, #mobileMenu a").on("click", () => {
+  $("#mobileMenu").removeClass("translate-x-0").addClass("translate-x-full");
+});
 
     // (Opsional) close setelah klik link
     $("#mobileMenu a").on("click", function () {

@@ -222,3 +222,4 @@ export function renderSearchPage(user) {
     $("#movieDetailModal").addClass("hidden").removeClass("flex");
   });
 }
+
