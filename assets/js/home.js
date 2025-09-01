@@ -78,7 +78,7 @@ export function renderHomePage(user) {
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20 px-6 bg-gradient-to-r from-purple-900 via-purple-800 to-indigo-900 text-white">
+    <section id="about" class="py-20 px-6 bg-gradient-to-r from-[#8900f2]/80 via-[#a100f2]/80 to-[#b100e8]/80 text-white">
       <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
         <div>
           <h2 class="text-4xl font-bold mb-6">About Us</h2>
@@ -166,38 +166,40 @@ export function renderHomePage(user) {
         
         <!-- Left (Accordion FAQ) -->
         <div class="md:col-span-2">
-          <h2 class="text-4xl font-bold mb-6">Tanya Jawab</h2>
-          <p class=" mb-8">Temukan jawaban dari pertanyaan umum seputar penggunaan Cineview.</p>
+          <h1 class="text-4xl font-bold mb-3">Any Questions?</h1>
+          <h2 class="text-4xl font-bold mb-6">We got you.</h2>
+
+          <p class=" mb-8">Find answers to frequently asked questions about using Cineview.</p>
 
           <div class="space-y-4">
             <!-- FAQ Item -->
             <div class="border rounded-xl overflow-hidden">
               <button class="w-full flex justify-between items-center px-6 py-4 text-left font-semibold text-gray-800 bg-white hover:bg-gray-100 faq-toggle">
-                Apa itu Cineview?
+                What is Cineview?
                 <i class="fa-solid fa-chevron-down transition-transform"></i>
               </button>
               <div class="faq-content hidden px-6 py-4 bg-gray-50 text-gray-700">
-                Cineview adalah platform database film yang menyediakan informasi detail, rating, dan ulasan untuk berbagai jenis film.
+                Cineview is a movie database platform that provides detailed information, ratings, and reviews for various types of movies.
               </div>
             </div>
 
             <div class="border rounded-xl overflow-hidden">
               <button class="w-full flex justify-between items-center px-6 py-4 text-left font-semibold text-gray-800 bg-white hover:bg-gray-100 faq-toggle">
-                Siapa saja yang bisa menggunakan Cineview?
+                Who can use Cineview?
                 <i class="fa-solid fa-chevron-down transition-transform"></i>
               </button>
               <div class="faq-content hidden px-6 py-4 bg-gray-50 text-gray-700">
-                Semua orang yang ingin mencari, mengeksplorasi, atau memberikan ulasan film.
+                Everyone who wants to search for, explore, or review movies.
               </div>
             </div>
 
             <div class="border rounded-xl overflow-hidden">
               <button class="w-full flex justify-between items-center px-6 py-4 text-left font-semibold text-gray-800 bg-white hover:bg-gray-100 faq-toggle">
-                Apakah data pribadi saya aman?
+                Is my personal data secure?
                 <i class="fa-solid fa-chevron-down transition-transform"></i>
               </button>
               <div class="faq-content hidden px-6 py-4 bg-gray-50 text-gray-700">
-                Ya, kami menjaga keamanan data Anda dengan sistem enkripsi dan proteksi berlapis.
+               Yes, we protect your data with encryption and multi-layered protection systems.
               </div>
             </div>
           </div>
@@ -205,10 +207,10 @@ export function renderHomePage(user) {
 
         <!-- Right (Hubungi Kami Box) -->
         <div class="bg-red-50 p-8 rounded-2xl shadow-md">
-          <h3 class="text-2xl font-bold text-gray-900 mb-4">Punya Pertanyaan Lain?</h3>
-          <p class="text-gray-700 mb-6">Kami siap membantu Anda. Jangan ragu untuk menghubungi tim kami kapan saja.</p>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Have another question?</h3>
+          <p class="text-gray-700 mb-6">We are ready to assist you. Please feel free to contact our team anytime.</p>
           <a href="#contact" class="block w-full text-center bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-xl transition">
-            Hubungi Kami
+            Contact Us
           </a>
         </div>
       </div>
