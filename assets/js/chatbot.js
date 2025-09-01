@@ -11,20 +11,33 @@ let messages = { history: [] };
 
 export function initializeChatbot() {
   console.log("🎬 CineBot UI initialized");
-  
+
+  const $popup = $("#chatbotPopup");
+  const $messages = $("#chatbotMessages");
+  const $input = $("#chatbotInput");
+
   // Show default message immediately
   appendMessage("bot", "Hi there! How can I help you find a movie, TV series, or anime today?");
 
+  // Toggle popup
   $("#chatbotToggle").on("click", () => {
-    $("#chatbotPopup").toggleClass("hidden flex");
+    if ($popup.hasClass("hidden")) {
+      $popup.removeClass("hidden").addClass("flex");
+      // Scroll to bottom after visible
+      setTimeout(() => {
+        $messages.scrollTop($messages[0].scrollHeight);
+      }, 50);
+    } else {
+      $popup.removeClass("flex").addClass("hidden");
+    }
   });
 
   $("#chatbotClose").on("click", () => {
-    $("#chatbotPopup").addClass("hidden").removeClass("flex");
+    $popup.removeClass("flex").addClass("hidden");
   });
 
   $("#chatbotSend").on("click", handleSend);
-  $("#chatbotInput").on("keypress", function (e) {
+  $input.on("keypress", function (e) {
     if (e.key === "Enter") {
       e.preventDefault();
       handleSend();
@@ -37,10 +50,10 @@ export function initializeChatbot() {
       return;
     }
 
-    const userMessage = $("#chatbotInput").val().trim();
+    const userMessage = $input.val().trim();
     if (!userMessage) return;
 
-    $("#chatbotInput").val("");
+    $input.val("");
     appendMessage("user", userMessage);
 
     const loaderId = appendLoader();
@@ -57,7 +70,7 @@ export function initializeChatbot() {
         const chunkText = chunk.text();
         botText += chunkText;
         $(botBubble).html(botText);
-        $("#chatbotMessages").scrollTop($("#chatbotMessages")[0].scrollHeight);
+        $messages.scrollTop($messages[0].scrollHeight);
       }
 
       messages.history.push({ role: "user", parts: [{ text: userMessage }] });
@@ -74,11 +87,12 @@ export function initializeChatbot() {
       sender === "user"
         ? "bg-gray-700 text-white ml-auto"
         : "bg-gray-800 text-gray-200 mr-auto";
+
     const bubble = $(
       `<div class="p-2 rounded-lg ${msgClass} max-w-[80%] whitespace-pre-wrap">${message}</div>`
     );
-    $("#chatbotMessages").append(bubble);
-    $("#chatbotMessages").scrollTop($("#chatbotMessages")[0].scrollHeight);
+    $messages.append(bubble);
+    $messages.scrollTop($messages[0].scrollHeight);
     return bubble;
   }
 
@@ -87,7 +101,7 @@ export function initializeChatbot() {
     const loader = $(
       `<div id="${loaderId}" class="p-2 rounded-lg bg-gray-800 text-gray-400 mr-auto">⏳ Typing...</div>`
     );
-    $("#chatbotMessages").append(loader);
+    $messages.append(loader);
     return loaderId;
   }
 
