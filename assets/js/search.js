@@ -3,7 +3,7 @@ import { initializeChatbot } from "./chatbot.js";
 
 export function renderSearchPage(user) {
   $("#app").html(`
-    <div class="min-h-screen bg-[radial-gradient(circle_at_30%_50%,_#0B0214_0%,_#2A0549_50%,_#3D0A6D_150%)] text-white flex flex-col animated-gradient relative">
+    <div class="min-h-screen bg-[radial-gradient(circle_at_30%_50%,_#0B0214_0%,_#2A0549_50%,_#4C1D95_100%,_#DB2777_150%)] text-white flex flex-col animated-gradient relative">
       <!-- Vibrant blurred gradient overlay -->
       <div class="absolute inset-0 bg-[linear-gradient(135deg,_#4C1D95/30,_#DB2777/10,_transparent_50%)] backdrop-blur-sm opacity-30 z-0"></div>
 
@@ -141,9 +141,9 @@ export function renderSearchPage(user) {
       100% { background-position: 0% 50%; }
     }
     .animated-gradient {
-      background: radial-gradient(circle at 30% 50%, #0B0214 0%, #2A0549 50%, #3D0A6D 150%);
-      background-size: 300% 300%;
-      animation: gradient-flow 8s ease-in-out infinite;
+      background: radial-gradient(circle at 30% 50%, #0B0214 0%, #2A0549 50%, #4C1D95 100%, #DB2777 150%);
+      background-size: 400% 400%;
+      animation: gradient-flow 6s ease-in-out infinite;
     }
     #chatbotMessages > div {
       padding: 8px 12px;
