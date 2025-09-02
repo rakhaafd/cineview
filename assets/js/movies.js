@@ -101,7 +101,7 @@ function showMovieDetail(m) {
         <input type="text" id="commentInput" placeholder="Write a comment..." 
                class="flex-1 px-4 py-2 rounded-xl bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-600 transition-all" required>
         <button type="submit" class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-semibold transition-colors">
-          <i class="fa-solid fa-paper-plane mr-2"></i>
+          <i class="fa-solid fa-paper-plane"></i>
         </button>
       </form>
     </div>
