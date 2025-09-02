@@ -57,7 +57,7 @@ export async function renderHomePage(user) {
               and reviews — all in one place.
             </p>
           </div>
-          <img src="/assets/img/icon-movie.png" 
+          <img src="https://cdn-icons-png.flaticon.com/512/4221/4221484.png" 
                alt="About Cineview" class="w-80 mx-auto drop-shadow-lg">
         </div>
       </section>
