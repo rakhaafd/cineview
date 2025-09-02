@@ -131,8 +131,24 @@ export function handleLogout() {
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     saveUser(user, true); // simpan user
-    if (window.location.hash === "#login" || window.location.hash === "#register") {
+    if (
+      window.location.hash === "#login" ||
+      window.location.hash === "#register"
+    ) {
       window.location.hash = "#home"; // auto redirect ke home
     }
   }
 });
+
+firebase
+  .auth()
+  .getRedirectResult()
+  .then((result) => {
+    if (result.user) {
+      saveUser(result.user, true);
+      window.location.hash = "#home";
+    }
+  })
+  .catch((err) => {
+    showError("Redirect login gagal: " + err.message);
+  });
