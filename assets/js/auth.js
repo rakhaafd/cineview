@@ -6,26 +6,26 @@ export function handleGoogleLogin() {
   provider.addScope("profile email");
   provider.setCustomParameters({ prompt: "select_account" });
 
-  firebase
-    .auth()
-    .signInWithPopup(provider)
-    .then((result) => {
-      const user = result.user;
-      saveUser(user, true);
-      window.location.hash = "#home";
-      showSuccess("Welcome back, " + (user.displayName || user.email) + "!");
-    })
-    .catch((err) => {
-      if (
-        err.code === "auth/popup-blocked" ||
-        err.code === "auth/popup-closed-by-user"
-      ) {
-        // fallback ke redirect kalau popup gagal
-        firebase.auth().signInWithRedirect(provider);
-      } else {
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+  if (isMobile) {
+    // Gunakan redirect di HP
+    firebase.auth().signInWithRedirect(provider);
+  } else {
+    // Gunakan popup di desktop
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then((result) => {
+        const user = result.user;
+        saveUser(user, true);
+        window.location.hash = "#home";
+        showSuccess("Welcome back, " + (user.displayName || user.email) + "!");
+      })
+      .catch((err) => {
         showError("Google login gagal: " + err.message);
-      }
-    });
+      });
+  }
 }
 
 // ============ EMAIL LOGIN ============
@@ -128,6 +128,20 @@ export function handleLogout() {
 }
 
 // ============ LISTENER UNTUK REDIRECT LOGIN ============
+firebase.auth().getRedirectResult()
+  .then((result) => {
+    if (result.user) {
+      saveUser(result.user, true);
+      window.location.hash = "#home";
+      showSuccess("Welcome back, " + (result.user.displayName || result.user.email) + "!");
+    }
+  })
+  .catch((err) => {
+    if (err && err.message) {
+      showError("Google redirect login gagal: " + err.message);
+    }
+  });
+
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     saveUser(user, true); // simpan user
