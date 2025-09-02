@@ -201,38 +201,6 @@ export async function renderHomePage(user) {
         </div>
       </section>
 
-      <!-- Chatbot Button -->
-      <button id="chatbotToggle" class="fixed bottom-6 right-6 bg-yellow-400 hover:bg-yellow-500 text-gray-900 p-4 rounded-full shadow-lg transition-transform duration-300 hover:scale-110 z-100 pointer-events-auto">
-        <i class="fa-solid fa-robot text-2xl"></i>
-      </button>
-
-      <!-- Chatbot Popup -->
-      <div id="chatbotPopup" class="hidden fixed bottom-20 right-6 w-96 max-w-[90vw] h-[500px] bg-gray-800 rounded-xl shadow-2xl z-100 flex flex-col pointer-events-auto">
-        <div class="bg-gradient-to-r from-[#4C1D95] to-[#DB2777] px-4 py-3 flex justify-between items-center rounded-t-xl">
-          <h3 class="text-white font-bold text-lg">CineBot 🤖</h3>
-          <button id="chatbotClose" class="text-white hover:text-yellow-300 text-xl font-semibold transition-colors pointer-events-auto">✖</button>
-        </div>
-        <div id="chatbotMessages" class="flex-1 p-4 overflow-y-auto bg-gray-900 text-gray-200 flex flex-col gap-3">
-          <div class="bg-gray-800 p-2 rounded-lg max-w-[80%]">Loading...</div>
-        </div>
-        <div class="p-4 border-t border-gray-700">
-          <div class="flex items-center bg-gray-700 rounded-full overflow-hidden">
-            <input 
-              type="text" 
-              id="chatbotInput" 
-              placeholder="Ask about movies..." 
-              class="flex-1 px-4 py-2 bg-transparent focus:outline-none text-white placeholder-gray-400 text-sm"
-            >
-            <button 
-              id="chatbotSend" 
-              class="bg-yellow-400 hover:bg-yellow-500 text-gray-900 px-4 py-2 pointer-events-auto"
-            >
-              <i class="fa-solid fa-paper-plane text-sm"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-
       <!-- Footer -->
       <footer class="py-6 text-center bg-gray-900 text-gray-400 z-5">
         <p>&copy; 2025 Cineview 🎬. All Rights Reserved.</p>
