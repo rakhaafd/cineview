@@ -1,5 +1,4 @@
 import { renderNavbar } from "./navbar.js";
-import { initializeChatbot } from "./chatbot.js";
 import { initCineBot } from "../gemini/gemini.js";
 
 export async function renderHomePage(user) {
@@ -57,7 +56,7 @@ export async function renderHomePage(user) {
               and reviews — all in one place.
             </p>
           </div>
-          <img src="https://cdn-icons-png.flaticon.com/512/4221/4221484.png" 
+          <img src="../assets/img/icon-movie.png" 
                alt="About Cineview" class="w-80 mx-auto drop-shadow-lg">
         </div>
       </section>
@@ -88,7 +87,7 @@ export async function renderHomePage(user) {
       </section>
 
       <!-- Testimony Section (Carousel) -->
-      <section id="testimony" class="py-20 px-6 bg-gradient-to-r from-indigo-950 via-purple-950 to-violet-930 text-white z-10">
+      <section id="testimony" class="py-20 px-6 bg-gradient-to-r from-indigo-950 via-purple-950 to-violet-930 text-white">
         <h2 class="text-4xl font-bold mb-12 text-center">What Our Users Say</h2>
         <div class="relative max-w-3xl mx-auto overflow-hidden">
           <div id="carousel" class="flex transition-transform duration-700 ease-in-out">
@@ -116,58 +115,52 @@ export async function renderHomePage(user) {
         </div>
       </section>
 
-    <!-- FAQ Section -->
-    <section id="faq" class="py-20 px-6 bg-gradient-to-r from-indigo-950 via-purple-900 to-violet-950 z-10">
-    <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-12 items-start text-white">
-    <div class="md:col-span-2">
-      <h1 class="text-4xl font-bold mb-3">Any Questions?</h1>
-      <h2 class="text-4xl font-bold mb-6">We got you.</h2>
-      <p class="mb-8">Find answers to frequently asked questions about using Cineview.</p>
-      <div class="space-y-4">
-        
-        <div class="border rounded-xl overflow-hidden">
-          <button class="w-full flex justify-between items-center px-6 py-4 text-left font-semibold text-gray-800 bg-white hover:bg-gray-100 faq-toggle">
-            What is Cineview?
-            <i class="fa-solid fa-chevron-down transition-transform"></i>
-          </button>
-          <div class="faq-content px-6 py-4 bg-gray-50 text-gray-700" style="display:none;">
-            Cineview is a movie database platform that provides detailed information, ratings, and reviews for various types of movies.
+      <!-- FAQ Section -->
+      <section id="faq" class="py-20 px-6 bg-gradient-to-r from-indigo-950 via-purple-900 to-violet-950 z-10">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-12 items-start text-white">
+          <div class="md:col-span-2">
+            <h1 class="text-4xl font-bold mb-3">Any Questions?</h1>
+            <h2 class="text-4xl font-bold mb-6">We got you.</h2>
+            <p class="mb-8">Find answers to frequently asked questions about using Cineview.</p>
+            <div class="space-y-4">
+              <div class="border rounded-xl overflow-hidden">
+                <button class="w-full flex justify-between items-center px-6 py-4 text-left font-semibold text-gray-800 bg-white hover:bg-gray-100 faq-toggle">
+                  What is Cineview?
+                  <i class="fa-solid fa-chevron-down transition-transform"></i>
+                </button>
+                <div class="faq-content px-6 py-4 bg-gray-50 text-gray-700" style="display:none;">
+                  Cineview is a movie database platform that provides detailed information, ratings, and reviews for various types of movies.
+                </div>
+              </div>
+              <div class="border rounded-xl overflow-hidden">
+                <button class="w-full flex justify-between items-center px-6 py-4 text-left font-semibold text-gray-800 bg-white hover:bg-gray-100 faq-toggle">
+                  Who can use Cineview?
+                  <i class="fa-solid fa-chevron-down transition-transform"></i>
+                </button>
+                <div class="faq-content px-6 py-4 bg-gray-50 text-gray-700" style="display:none;">
+                  Everyone who wants to search for, explore, or review movies.
+                </div>
+              </div>
+              <div class="border rounded-xl overflow-hidden">
+                <button class="w-full flex justify-between items-center px-6 py-4 text-left font-semibold text-gray-800 bg-white hover:bg-gray-100 faq-toggle">
+                  Is my personal data secure?
+                  <i class="fa-solid fa-chevron-down transition-transform"></i>
+                </button>
+                <div class="faq-content px-6 py-4 bg-gray-50 text-gray-700" style="display:none;">
+                  Yes, we protect your data with encryption and multi-layered protection systems.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-red-50 p-8 rounded-2xl shadow-md">
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Have another question?</h3>
+            <p class="text-gray-700 mb-6">We are ready to assist you. Please feel free to contact our team anytime.</p>
+            <a href="#contact" class="block w-full text-center bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-xl transition">
+              Contact Us
+            </a>
           </div>
         </div>
-
-        <div class="border rounded-xl overflow-hidden">
-          <button class="w-full flex justify-between items-center px-6 py-4 text-left font-semibold text-gray-800 bg-white hover:bg-gray-100 faq-toggle">
-            Who can use Cineview?
-            <i class="fa-solid fa-chevron-down transition-transform"></i>
-          </button>
-          <div class="faq-content px-6 py-4 bg-gray-50 text-gray-700" style="display:none;">
-            Everyone who wants to search for, explore, or review movies.
-          </div>
-        </div>
-
-        <div class="border rounded-xl overflow-hidden">
-          <button class="w-full flex justify-between items-center px-6 py-4 text-left font-semibold text-gray-800 bg-white hover:bg-gray-100 faq-toggle">
-            Is my personal data secure?
-            <i class="fa-solid fa-chevron-down transition-transform"></i>
-          </button>
-          <div class="faq-content px-6 py-4 bg-gray-50 text-gray-700" style="display:none;">
-            Yes, we protect your data with encryption and multi-layered protection systems.
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="bg-red-50 p-8 rounded-2xl shadow-md">
-      <h3 class="text-2xl font-bold text-gray-900 mb-4">Have another question?</h3>
-      <p class="text-gray-700 mb-6">We are ready to assist you. Please feel free to contact our team anytime.</p>
-      <a href="#contact" class="block w-full text-center bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-xl transition">
-        Contact Us
-      </a>
-    </div>
-  </div>
-</section>
-
+      </section>
 
       <!-- Contact Section -->
       <section id="contact" class="py-20 px-6 bg-gradient-to-r from-purple-900 via-violet-900 to-indigo-950 text-white z-10">
@@ -201,8 +194,40 @@ export async function renderHomePage(user) {
         </div>
       </section>
 
+      <!-- Chatbot Button -->
+      <button id="chatbotToggle" class="fixed bottom-6 right-6 bg-yellow-400 hover:bg-yellow-500 text-gray-900 p-4 rounded-full shadow-lg transition-transform duration-300 hover:scale-110 z-1001 pointer-events-auto">
+        <i class="fa-solid fa-robot text-2xl"></i>
+      </button>
+
+      <!-- Chatbot Popup -->
+      <div id="chatbotPopup" class="hidden fixed bottom-20 right-6 w-96 max-w-[90vw] h-[500px] bg-gray-800 rounded-xl shadow-2xl z-1000 flex flex-col pointer-events-auto">
+        <div class="bg-gradient-to-r from-[#4C1D95] to-[#DB2777] px-4 py-3 flex justify-between items-center rounded-t-xl">
+          <h3 id="cineBot" class="text-white font-bold text-lg">CineBot 🤖</h3>
+          <button id="chatbotClose" class="text-white hover:text-yellow-300 text-xl font-semibold transition-colors pointer-events-auto">✖</button>
+        </div>
+        <div id="chatbotMessages" class="flex-1 p-4 overflow-y-auto bg-gray-900 text-gray-200 flex flex-col gap-3">
+          <div class="bg-gray-800 p-2 rounded-lg max-w-[80%]">Hi there! How can I help you find a movie, TV series, or anime today?</div>
+        </div>
+        <div class="p-4 border-t border-gray-700">
+          <div class="flex items-center bg-gray-700 rounded-full overflow-hidden">
+            <input 
+              type="text" 
+              id="chatbotInput" 
+              placeholder="Ask about movies..." 
+              class="flex-1 px-4 py-2 bg-transparent focus:outline-none text-white placeholder-gray-400 text-sm"
+            >
+            <button 
+              id="chatbotSend" 
+              class="bg-yellow-400 hover:bg-yellow-500 text-gray-900 px-4 py-2 pointer-events-auto"
+            >
+              <i class="fa-solid fa-paper-plane text-sm"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
       <!-- Footer -->
-      <footer class="py-6 text-center bg-gray-900 text-gray-400 z-101">
+      <footer class="py-6 text-center bg-gray-900 text-gray-400 z-10">
         <p>&copy; 2025 Cineview 🎬. All Rights Reserved.</p>
         <div class="flex justify-center gap-4 mt-3">
           <a href="#"><i class="fa-brands fa-facebook text-xl hover:text-white"></i></a>
@@ -241,6 +266,10 @@ export async function renderHomePage(user) {
     }
     #chatbotPopup {
       pointer-events: auto;
+      z-index: 1000 !important;
+    }
+    #chatbotToggle {
+      z-index: 1001 !important;
     }
     #chatbotMessages {
       min-height: 0;
@@ -279,10 +308,24 @@ export async function renderHomePage(user) {
     console.log("🚀 renderHomePage: Initializing CineBot");
     await initCineBot();
     console.log("✅ renderHomePage: CineBot model ready");
-    initializeChatbot();
+    $(document).ready(() => {
+      initializeChatbot();
+    });
   } catch (err) {
     console.error("❌ renderHomePage: Failed to initialize CineBot:", err);
-    initializeChatbot(); // Proceed with UI for partial functionality
+    appendMessage("bot", "⚠️ Model not ready. Please try again later.");
+    $(document).ready(() => {
+      initializeChatbot();
+      // Retry initialization after a delay
+      setTimeout(async () => {
+        try {
+          await initCineBot();
+          console.log("✅ renderHomePage: CineBot model retry successful");
+        } catch (retryErr) {
+          console.error("❌ renderHomePage: Retry failed:", retryErr);
+        }
+      }, 5000);
+    });
   }
 
   // Navbar Mobile
@@ -310,7 +353,7 @@ export async function renderHomePage(user) {
   $(document)
     .off("click.profile")
     .on("click.profile", function (e) {
-      if (!$(e.target).closest("#profileBtn, #profileMenu").length) {
+      if (!$(e.target).closest("#profileBtn, #profileMenu, #chatbotToggle, #chatbotPopup").length) {
         console.log("🖱️ Clicked outside profile menu");
         $("#profileMenu").addClass("hidden");
       }
@@ -371,21 +414,32 @@ export async function renderHomePage(user) {
 
   // FAQ Toggle
   $(".faq-toggle")
-    .off("click") // buang listener lama biar gak numpuk
+    .off("click")
     .on("click", function () {
       console.log("❓ FAQ toggle clicked");
-
       let $icon = $(this).find(".fa-chevron-down");
       let $content = $(this).next(".faq-content");
-
       if ($content.is(":visible")) {
-        // Tutup
         $content.stop(true, true).slideUp(300);
         $icon.removeClass("rotate-180");
       } else {
-        // Buka
         $content.stop(true, true).slideDown(300);
         $icon.addClass("rotate-180");
       }
     });
+
+  // Define appendMessage for error handling
+  function appendMessage(sender, message) {
+    const $messages = $("#chatbotMessages");
+    const msgClass =
+      sender === "user"
+        ? "bg-gray-700 text-white ml-auto"
+        : "bg-gray-800 text-gray-200 mr-auto";
+    const bubble = $(
+      `<div class="p-2 rounded-lg ${msgClass} max-w-[80%] whitespace-pre-wrap">${message}</div>`
+    );
+    $messages.append(bubble);
+    $messages.scrollTop($messages[0].scrollHeight);
+    return bubble;
+  }
 }
