@@ -37,7 +37,7 @@ export function renderSearchPage(user) {
       </div>
 
       <!-- Search Section -->
-      <section id="searchSection" class="flex-1 flex flex-col items-center justify-center text-center py-20 transition-all duration-500 z-10">
+      <section id="searchSection" class="flex-1 flex flex-col items-center justify-center text-center py-20 px-4 transition-all duration-500 z-10">
         <h1 class="text-5xl font-extrabold mb-4">
           Lookin' for <span id="logoBtn" class="text-yellow-300">cinema</span>🎬👀?
         </h1>
@@ -57,7 +57,7 @@ export function renderSearchPage(user) {
             id="searchBtn" 
             class="bg-yellow-400 hover:bg-yellow-500 text-gray-900 px-6 py-4 font-semibold transition-all duration-300 hover:shadow-lg"
           >
-            <i class="fa-solid fa-magnifying-glass"></i> Search
+            <i class="fa-solid fa-magnifying-glass"></i>
           </button>
         </div>
 
