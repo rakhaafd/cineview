@@ -22,7 +22,7 @@ export async function renderHomePage(user) {
           <a href="#testimony" class="hover:text-yellow-400">Testimony</a>
           <a href="#search" class="hover:text-yellow-400">Search</a>
         </nav>
-        <div class="p-6 border-t border-purple-700">
+        <div class="p-6 border-t border-purple-700 z-100">
           <button id="logoutBtnMobile"
             class="w-full py-2 px-4 rounded-lg bg-red-600 hover:bg-red-700 transition">
             <i class="fa-solid fa-right-from-bracket mr-2"></i> Logout
@@ -31,7 +31,7 @@ export async function renderHomePage(user) {
       </div>
 
       <!-- Hero Section -->
-      <section class="relative flex flex-col justify-center items-center text-white text-center min-h-screen px-6 z-5">
+      <section class="relative flex flex-col justify-center items-center text-white text-center min-h-screen px-6 z-10">
         <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1524985069026-dd778a71c7b4')] 
                     bg-cover bg-center brightness-50"></div>
         <div class="relative z-10">
@@ -47,7 +47,7 @@ export async function renderHomePage(user) {
       </section>
 
       <!-- About Section -->
-      <section id="about" class="py-20 px-6 bg-gradient-to-r from-purple-900 via-violet-900 to-indigo-950 text-white z-5">
+      <section id="about" class="py-20 px-6 bg-gradient-to-r from-purple-900 via-violet-900 to-indigo-950 text-white z-10">
         <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div>
             <h2 class="text-4xl font-bold mb-6">About Us</h2>
@@ -63,7 +63,7 @@ export async function renderHomePage(user) {
       </section>
 
       <!-- Features Section -->
-      <section id="features" class="py-20 px-6 bg-gradient-to-r from-purple-950 via-violet-900 to-indigo-950 text-white z-5">
+      <section id="features" class="py-20 px-6 bg-gradient-to-r from-purple-950 via-violet-900 to-indigo-950 text-white z-10">
         <div class="max-w-6xl mx-auto text-center mb-12">
           <h2 class="text-4xl font-bold">Why Choose Cineview?</h2>
           <p class="text-lg text-gray-300 mt-4">Discover what makes Cineview your best choice for exploring movies.</p>
@@ -88,7 +88,7 @@ export async function renderHomePage(user) {
       </section>
 
       <!-- Testimony Section (Carousel) -->
-      <section id="testimony" class="py-20 px-6 bg-gradient-to-r from-indigo-950 via-purple-950 to-violet-930 text-white z-5">
+      <section id="testimony" class="py-20 px-6 bg-gradient-to-r from-indigo-950 via-purple-950 to-violet-930 text-white z-10">
         <h2 class="text-4xl font-bold mb-12 text-center">What Our Users Say</h2>
         <div class="relative max-w-3xl mx-auto overflow-hidden">
           <div id="carousel" class="flex transition-transform duration-700 ease-in-out">
@@ -117,7 +117,7 @@ export async function renderHomePage(user) {
       </section>
 
     <!-- FAQ Section -->
-    <section id="faq" class="py-20 px-6 bg-gradient-to-r from-indigo-950 via-purple-900 to-violet-950 z-5">
+    <section id="faq" class="py-20 px-6 bg-gradient-to-r from-indigo-950 via-purple-900 to-violet-950 z-10">
     <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-12 items-start text-white">
     <div class="md:col-span-2">
       <h1 class="text-4xl font-bold mb-3">Any Questions?</h1>
@@ -170,7 +170,7 @@ export async function renderHomePage(user) {
 
 
       <!-- Contact Section -->
-      <section id="contact" class="py-20 px-6 bg-gradient-to-r from-purple-900 via-violet-900 to-indigo-950 text-white z-5">
+      <section id="contact" class="py-20 px-6 bg-gradient-to-r from-purple-900 via-violet-900 to-indigo-950 text-white z-10">
         <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div>
             <h2 class="text-4xl font-bold mb-6">Get in Touch</h2>
@@ -202,7 +202,7 @@ export async function renderHomePage(user) {
       </section>
 
       <!-- Footer -->
-      <footer class="py-6 text-center bg-gray-900 text-gray-400 z-5">
+      <footer class="py-6 text-center bg-gray-900 text-gray-400 z-101">
         <p>&copy; 2025 Cineview 🎬. All Rights Reserved.</p>
         <div class="flex justify-center gap-4 mt-3">
           <a href="#"><i class="fa-brands fa-facebook text-xl hover:text-white"></i></a>
