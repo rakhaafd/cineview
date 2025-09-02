@@ -1,6 +1,11 @@
 import { renderHomePage } from "./home.js";
 import { renderSearchPage } from "./search.js";
-import { handleGoogleLogin, handleEmailLogin, handleEmailRegister, getUser } from "./auth.js";
+import {
+  handleGoogleLogin,
+  handleEmailLogin,
+  handleEmailRegister,
+  getUser,
+} from "./auth.js";
 import { showSuccess, showError } from "./alert.js";
 
 export function router() {
@@ -54,7 +59,7 @@ function renderLoginForm() {
     <div class="relative flex items-center justify-center min-h-screen overflow-hidden">
       <div class="absolute inset-0 bg-animated"></div>
       <div class="relative z-10 card-auth bg-[radial-gradient(circle_at_center,_#0B0214_0%,_#3D0A6D_200%)]
-                  p-8 rounded-xl shadow-lg text-gray-400 w-full max-w-md hover:scale-105 transition-transform duration-300">
+                  p-8 rounded-xl shadow-lg text-gray-400 w-full max-w-md hover:scale-105 transition-transform duration-300 mx-5">
         <h1 class="text-3xl font-bold mb-6 text-purple-600">Cineview🎬</h1>
         <h2 class="text-2xl font-bold text-white">Welcome back to Cineview.</h2>
         <p class="text-sm mb-6">
@@ -129,7 +134,7 @@ function renderRegisterForm() {
     <div class="relative flex items-center justify-center min-h-screen overflow-hidden">
       <div class="absolute inset-0 bg-animated"></div>
       <div class="relative z-10 card-auth bg-[radial-gradient(circle_at_center,_#0B0214_0%,_#3D0A6D_200%)]
-                  p-8 rounded-xl shadow-lg text-gray-400 w-full max-w-md hover:scale-105 transition-transform duration-300">
+                  p-8 rounded-xl shadow-lg text-gray-400 w-full max-w-md hover:scale-105 transition-transform duration-300 mx-5">
         <h1 class="text-3xl font-bold mb-6 text-purple-600">Cineview🎬</h1>
         <h2 class="text-2xl font-bold text-white">Join Cineview Today!</h2>
         <p class="text-sm mb-6">
